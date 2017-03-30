@@ -1,0 +1,121 @@
+--- START Test "Cyrillic test" ---
+Code: 201 Line: 3 Token: HELLO
+--- END Test ---
+
+
+--- START Test "Whitespace test" ---
+Code: 103 Line: 1 Token: VAR
+Code: 202 Line: 1 Token: LONGLONGLONGLONGLONGNAME
+Code: 6 Line: 1 Token: :
+Code: 108 Line: 1 Token: EXT
+Code: 5 Line: 1 Token: ;
+Code: 109 Line: 2 Token: END
+--- END Test ---
+
+
+--- START Test "Usual comment test" ---
+Code: 3 Line: 1 Token: (*
+Code: 4 Line: 10 Token: *)
+--- END Test ---
+
+
+--- START Test "Non-closed comments test" ---
+Code: 101 Line: 1 Token: PROCEDURE
+Code: 3 Line: 1 Token: (*
+--- END Test ---
+
+
+--- START Test "Without spaces comment test" ---
+Code: 3 Line: 1 Token: (*
+Code: 4 Line: 5 Token: *)
+--- END Test ---
+
+
+--- START Test "Correct test" ---
+Code: 101 Line: 1 Token: PROCEDURE
+Code: 203 Line: 1 Token: PROC1
+Code: 1 Line: 1 Token: (
+Code: 103 Line: 1 Token: VAR
+Code: 204 Line: 1 Token: VAR1
+Code: 7 Line: 1 Token: ,
+Code: 205 Line: 1 Token: VAR2
+Code: 6 Line: 1 Token: :
+Code: 206 Line: 1 Token: COMPLEX
+Code: 5 Line: 1 Token: ;
+Code: 103 Line: 1 Token: VAR
+Code: 207 Line: 1 Token: VAR3
+Code: 6 Line: 1 Token: :
+Code: 105 Line: 1 Token: INTEGER
+Code: 2 Line: 1 Token: )
+Code: 5 Line: 1 Token: ;
+Code: 102 Line: 2 Token: BEGIN
+Code: 103 Line: 18 Token: VAR
+Code: 208 Line: 18 Token: A
+Code: 7 Line: 18 Token: ,
+Code: 209 Line: 18 Token: B
+Code: 7 Line: 18 Token: ,
+Code: 210 Line: 18 Token: C
+Code: 6 Line: 18 Token: :
+Code: 105 Line: 18 Token: INTEGER
+Code: 5 Line: 18 Token: ;
+Code: 3 Line: 19 Token: (*
+Code: 4 Line: 21 Token: *)
+Code: 103 Line: 22 Token: VAR
+Code: 211 Line: 22 Token: D
+Code: 7 Line: 22 Token: ,
+Code: 212 Line: 22 Token: F
+Code: 7 Line: 22 Token: ,
+Code: 213 Line: 22 Token: G
+Code: 6 Line: 22 Token: :
+Code: 106 Line: 22 Token: FLOAT
+Code: 5 Line: 22 Token: ;
+Code: 103 Line: 23 Token: VAR
+Code: 214 Line: 23 Token: LONGNAME
+Code: 6 Line: 23 Token: :
+Code: 108 Line: 23 Token: EXT
+Code: 5 Line: 23 Token: ;
+Code: 109 Line: 25 Token: END
+--- END Test ---
+
+
+--- START Test "Errors contains test" ---
+Code: 101 Line: 1 Token: PROCEDURE
+Code: 1 Line: 1 Token: (
+Code: 103 Line: 1 Token: VAR
+Code: 204 Line: 1 Token: VAR1
+Code: 7 Line: 1 Token: ,
+Code: 205 Line: 1 Token: VAR2
+Code: 6 Line: 1 Token: :
+Code: 206 Line: 1 Token: COMPLEX
+Code: 103 Line: 1 Token: VAR
+Code: 207 Line: 1 Token: VAR3
+Code: 6 Line: 1 Token: :
+Code: 105 Line: 1 Token: INTEGER
+Code: 2 Line: 1 Token: )
+Code: 5 Line: 1 Token: ;
+Code: 102 Line: 2 Token: BEGIN
+Code: 1 Line: 3 Token: (
+Code: 2 Line: 3 Token: )
+Code: 208 Line: 4 Token: A
+Code: 7 Line: 4 Token: ,
+Code: 209 Line: 4 Token: B
+Code: 7 Line: 4 Token: ,
+Code: 210 Line: 4 Token: C
+Code: 6 Line: 4 Token: :
+Code: 105 Line: 4 Token: INTEGER
+Code: 5 Line: 4 Token: ;
+Code: 103 Line: 5 Token: VAR
+Code: 211 Line: 5 Token: D
+Code: 7 Line: 5 Token: ,
+Code: 212 Line: 5 Token: F
+Code: 7 Line: 5 Token: ,
+Code: 213 Line: 5 Token: G
+Code: 6 Line: 5 Token: :
+Code: 106 Line: 5 Token: FLOAT
+Code: 5 Line: 5 Token: ;
+Code: 103 Line: 6 Token: VAR
+Code: 6 Line: 6 Token: :
+Code: 108 Line: 6 Token: EXT
+--- END Test ---
+
+

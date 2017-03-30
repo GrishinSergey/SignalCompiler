@@ -20,6 +20,9 @@ public class DelimitersTable extends Table {
         table.put(5, ";");
         table.put(6, ":");
         table.put(7, ",");
+        table.put(8, "($");
+        table.put(9, "$)");
+        table.put(10, ".");
     }
 
 }

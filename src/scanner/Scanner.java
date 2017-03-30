@@ -33,34 +33,38 @@ public class Scanner {
                 if (isLetter()) {
                     token = getIdentifier();
                     if ((tokenCode = KeyWordsTable.getInstance().getTokenCode(token)) != -1) {
-                        addToken(tokenCode, lineNumber);
+                        addToken(tokenCode);
                     } else if ((tokenCode = IdentifiersTable.getInstance().getTokenCode(token)) != -1) {
-                        addToken(tokenCode, lineNumber);
+                        addToken(tokenCode);
                     } else {
-                        addToken(IdentifiersTable.getInstance().add(token), lineNumber);
+                        addToken(IdentifiersTable.getInstance().add(token));
                     }
                 } else if (isDelimiter()) {
-                    if (chr != 40) {
-                        addToken(DelimitersTable.getInstance().getTokenCode(Character.toString((char) chr)), lineNumber);
-                        chr = reader.read();
-                    }
-                    else {
+                    if (chr == 40) {
                         token = Character.toString((char) chr);
                         chr = reader.read();
                         if (chr == 42) {
                             getComment();
                         }
                         else {
-                            addToken(DelimitersTable.getInstance().getTokenCode(token), lineNumber);
+                            addToken(DelimitersTable.getInstance().getTokenCode(token));
                         }
                     }
-                } else if (isWhitespace()) {
-                    while (isWhitespace()) {
-                        if (isNewLine()) {
-                            lineNumber++;
+                    else if (chr == 36) {
+                        readWhileWhitespace();
+                        token = getIdentifier();
+                        if ((tokenCode = IdentifiersTable.getInstance().getTokenCode(token)) != -1) {
+                            addToken(tokenCode);
+                        } else {
+                            addToken(IdentifiersTable.getInstance().add(token));
                         }
+                    }
+                    else {
+                        addToken(DelimitersTable.getInstance().getTokenCode(Character.toString((char) chr)));
                         chr = reader.read();
                     }
+                } else if (isWhitespace()) {
+                    readWhileWhitespace();
                 } else {
                     throw new ScannerException();
                 }
@@ -70,6 +74,15 @@ public class Scanner {
         } while (chr != -1);
         reader.close();
         return this;
+    }
+
+    private void readWhileWhitespace() throws IOException {
+        while (isWhitespace()) {
+            if (isNewLine()) {
+                lineNumber++;
+            }
+            chr = reader.read();
+        }
     }
 
     private String getIdentifier() throws ScannerException, IOException {
@@ -87,12 +100,12 @@ public class Scanner {
     }
 
     private void getComment() throws IOException {
-        addToken(DelimitersTable.getInstance().getTokenCode("(*"), lineNumber);
+        addToken(DelimitersTable.getInstance().getTokenCode("(*"));
         while (chr != -1) {
             if (chr == 42) {
                 chr = reader.read();
                 if (chr == 41) {
-                    addToken(DelimitersTable.getInstance().getTokenCode("*)"), lineNumber);
+                    addToken(DelimitersTable.getInstance().getTokenCode("*)"));
                     break;
                 }
             }
@@ -104,7 +117,6 @@ public class Scanner {
             }
         }
         chr = reader.read();
-
     }
 
     private int readWhile() throws IOException {
@@ -130,7 +142,7 @@ public class Scanner {
         return chr == 9 || chr == 32 || chr == 10 || chr == 13 || chr == 11;
     }
 
-    private void addToken(int tokenCode, int lineNumber) {
+    private void addToken(int tokenCode) {
         tokens.add(new Token(tokenCode, lineNumber));
     }
 

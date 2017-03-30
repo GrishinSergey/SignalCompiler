@@ -1,5 +1,0 @@
-VAR LONGLONGLONGLONGLONGNAME:        			     EXT;
-END
-      				                  
-                         			      
-                                         

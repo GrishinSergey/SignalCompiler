@@ -12,9 +12,9 @@ public class Test {
 
     public static void main(String[] args) {
         runTest("Cyrillic test", "/home/sergey/Java/projects/SignalCompiler/src/tests/code/test.sig");
-        runTest("Usual comment test", "/home/sergey/Java/projects/SignalCompiler/src/tests/code/comments-1.sig");
-        runTest("Non-closed comments test", "/home/sergey/Java/projects/SignalCompiler/src/tests/code/comments-2.sig");
-        runTest("Without spaces comment test", "/home/sergey/Java/projects/SignalCompiler/src/tests/code/comments-3.sig");
+//        runTest("Usual comment test", "/home/sergey/Java/projects/SignalCompiler/src/tests/code/comments-1.sig");
+//        runTest("Non-closed comments test", "/home/sergey/Java/projects/SignalCompiler/src/tests/code/comments-2.sig");
+//        runTest("Without spaces comment test", "/home/sergey/Java/projects/SignalCompiler/src/tests/code/comments-3.sig");
     }
 
     private static void runTest(String testName, String filePath) {

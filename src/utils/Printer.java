@@ -1,9 +1,6 @@
 package utils;
 
-import resources.DelimitersTable;
-import resources.IdentifiersTable;
-import resources.KeyWordsTable;
-import resources.Token;
+import resources.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,7 +16,12 @@ public class Printer {
     public void printTokenListWithTokens(ArrayList<Token> tokenList, String testName) {
         ps.println("--- START Test \"" + testName + "\" ---");
         for (Token token: tokenList) {
-            ps.println("Code: " + token.getCode() + " Line: " + token.getLineNumber() + " Token: " + getToken(token.getCode()));
+//            "Code: " + token.getCode() + " Line: " + token.getLineNumber() + " Token: " + getToken(token.getCode())
+            ps.format("Line: %4d Code: %4d Token: %15s\n",
+                    token.getLineNumber(),
+                    token.getCode(),
+                    getToken(token.getCode())
+                    );
         }
         ps.println("--- END Test ---\n\n");
     }
@@ -28,6 +30,10 @@ public class Printer {
         if (DelimitersTable.getInstance().getToken(tokenCode) != null) {
             return DelimitersTable.getInstance().getToken(tokenCode);
         }
+        if (ConstTable.getInstance().getToken(tokenCode) != null) {
+            return ConstTable.getInstance().getToken(tokenCode);
+        }
+
         if (KeyWordsTable.getInstance().getToken(tokenCode) != null) {
             return KeyWordsTable.getInstance().getToken(tokenCode);
         }

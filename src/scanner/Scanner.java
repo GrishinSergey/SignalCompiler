@@ -1,10 +1,7 @@
 package scanner;
 
 import exceptions.ScannerException;
-import resources.DelimitersTable;
-import resources.IdentifiersTable;
-import resources.KeyWordsTable;
-import resources.Token;
+import resources.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -34,10 +31,19 @@ public class Scanner {
                     token = getIdentifier();
                     if ((tokenCode = KeyWordsTable.getInstance().getTokenCode(token)) != -1) {
                         addToken(tokenCode);
-                    } else if ((tokenCode = IdentifiersTable.getInstance().getTokenCode(token)) != -1) {
+                    } else {
+                        addIdentifier(token);
+                    }
+                } else if (Character.isDigit(chr)) {
+                    token = "";
+                    while (Character.isDigit(chr)) {
+                        token += (char) chr;
+                        chr = reader.read();
+                    }
+                    if ((tokenCode = ConstTable.getInstance().getTokenCode(token)) != -1) {
                         addToken(tokenCode);
                     } else {
-                        addToken(IdentifiersTable.getInstance().add(token));
+                        addToken(ConstTable.getInstance().add(token));
                     }
                 } else if (isDelimiter()) {
                     if (chr == 40) {
@@ -53,11 +59,7 @@ public class Scanner {
                     else if (chr == 36) {
                         readWhileWhitespace();
                         token = getIdentifier();
-                        if ((tokenCode = IdentifiersTable.getInstance().getTokenCode(token)) != -1) {
-                            addToken(tokenCode);
-                        } else {
-                            addToken(IdentifiersTable.getInstance().add(token));
-                        }
+                        addIdentifier(token);
                     }
                     else {
                         addToken(DelimitersTable.getInstance().getTokenCode(Character.toString((char) chr)));
@@ -74,6 +76,15 @@ public class Scanner {
         } while (chr != -1);
         reader.close();
         return this;
+    }
+
+    private void addIdentifier(String token) {
+        int tokenCode;
+        if ((tokenCode = IdentifiersTable.getInstance().getTokenCode(token)) != -1) {
+            addToken(tokenCode);
+        } else {
+            addToken(IdentifiersTable.getInstance().add(token));
+        }
     }
 
     private void readWhileWhitespace() throws IOException {
@@ -135,7 +146,7 @@ public class Scanner {
     }
 
     private boolean isDelimiter() {
-        return chr == 44 || chr == 58 || chr == 59 || chr == 40 || chr == 41;
+        return chr == 44 || chr == 58 || chr == 59 || chr == 40 || chr == 41 || chr == 46 || chr == 61;
     }
 
     private boolean isWhitespace() {

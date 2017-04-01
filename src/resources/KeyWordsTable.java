@@ -19,16 +19,16 @@ public class KeyWordsTable extends Table {
         table.put(105, "INTEGER");
         table.put(106, "FLOAT");
         table.put(107, "BLOCKFLOAT");
-        table.put(109, "END");
-        table.put(109, "LABEL");
-        table.put(109, "PROGRAM");
-        table.put(109, "DEFFUNC");
-        table.put(109, "IN");
-        table.put(109, "OUT");
-        table.put(109, "LINK");
-        table.put(109, "LOOP");
-        table.put(109, "ENDLOOP");
-        table.put(109, "GOTO");
+        table.put(110, "END");
+        table.put(111, "LABEL");
+        table.put(112, "PROGRAM");
+        table.put(113, "DEFFUNC");
+        table.put(114, "IN");
+        table.put(115, "OUT");
+        table.put(116, "LINK");
+        table.put(117, "LOOP");
+        table.put(118, "ENDLOOP");
+        table.put(119, "GOTO");
     }
 
 }

@@ -17,13 +17,30 @@ public class Printer {
         ps.println("--- START Test \"" + testName + "\" ---");
         for (Token token: tokenList) {
 //            "Code: " + token.getCode() + " Line: " + token.getLineNumber() + " Token: " + getToken(token.getCode())
-            ps.format("Line: %4d Code: %4d Token: %15s\n",
+            ps.format("Line: %4d Code: %4d Type: %13s Token: %15s\n",
                     token.getLineNumber(),
                     token.getCode(),
-                    getToken(token.getCode())
-                    );
+                    getTokenType(token.getCode()),
+                    getToken(token.getCode()));
         }
         ps.println("--- END Test ---\n\n");
+    }
+
+    private String getTokenType(int tokenCode) {
+        if (DelimitersTable.getInstance().getToken(tokenCode) != null) {
+            return "Delimiter";
+        }
+        if (ConstTable.getInstance().getToken(tokenCode) != null) {
+            return "Const";
+        }
+
+        if (KeyWordsTable.getInstance().getToken(tokenCode) != null) {
+            return "KeyWord";
+        }
+        if (IdentifiersTable.getInstance().getToken(tokenCode) != null) {
+            return "Identifier";
+        }
+        return "Error";
     }
 
     private String getToken(int tokenCode) {

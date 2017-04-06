@@ -23,6 +23,7 @@ public class DelimitersTable extends Table {
         table.put(8, "($");
         table.put(9, "$)");
         table.put(10, ".");
+        table.put(11, "\\");
     }
 
 }

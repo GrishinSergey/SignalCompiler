@@ -52,14 +52,33 @@ public class Scanner {
                         if (chr == 42) {
                             getComment();
                         }
+                        else if (chr == 36) {
+                            token += (char) chr;
+                            chr = reader.read();
+                            addToken(DelimitersTable.getInstance().getTokenCode(token));
+                            readWhileWhitespace();
+                            token = "";
+                            while (!isWhitespace() && chr != -1) {
+                                token += (char) chr;
+                                if (isNewLine()) {
+                                    lineNumber++;
+                                }
+                                chr = reader.read();
+                            }
+                            addIdentifier(token);
+                            readWhileWhitespace();
+                            token = "" + (char) chr;
+                            chr = reader.read();
+                            if (isNewLine()) {
+                                lineNumber++;
+                            }
+                            token += (char) chr;
+                            addToken(DelimitersTable.getInstance().getTokenCode(token));
+                            chr = reader.read();
+                        }
                         else {
                             addToken(DelimitersTable.getInstance().getTokenCode(token));
                         }
-                    }
-                    else if (chr == 36) {
-                        readWhileWhitespace();
-                        token = getIdentifier();
-                        addIdentifier(token);
                     }
                     else {
                         addToken(DelimitersTable.getInstance().getTokenCode(Character.toString((char) chr)));
@@ -72,6 +91,7 @@ public class Scanner {
                 }
             } catch (ScannerException se) {
                 chr = readWhile();
+                addToken(-1);
             }
         } while (chr != -1);
         reader.close();
@@ -146,7 +166,7 @@ public class Scanner {
     }
 
     private boolean isDelimiter() {
-        return chr == 44 || chr == 58 || chr == 59 || chr == 40 || chr == 41 || chr == 46 || chr == 61;
+        return chr == 44 || chr == 58 || chr == 59 || chr == 40 || chr == 41 || chr == 46 || chr == 61 || chr == 92;
     }
 
     private boolean isWhitespace() {

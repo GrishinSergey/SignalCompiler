@@ -1,11 +1,11 @@
 package resources;
 
-public class Token {
+public class ScannerToken {
 
     private int code;
     private int lineNumber;
 
-    public Token(int code, int lineNumber) {
+    public ScannerToken(int code, int lineNumber) {
         this.code = code;
         this.lineNumber = lineNumber;
     }

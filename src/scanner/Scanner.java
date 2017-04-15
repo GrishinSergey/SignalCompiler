@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Scanner {
 
     private BufferedReader reader;
-    private ArrayList<Token> tokens;
+    private ArrayList<ScannerToken> tokens;
     private int chr;
     private int lineNumber;
 
@@ -174,10 +174,10 @@ public class Scanner {
     }
 
     private void addToken(int tokenCode) {
-        tokens.add(new Token(tokenCode, lineNumber));
+        tokens.add(new ScannerToken(tokenCode, lineNumber));
     }
 
-    public ArrayList<Token> getTokens() {
+    public ArrayList<ScannerToken> getTokens() {
         return tokens;
     }
 

@@ -9,15 +9,14 @@ import java.util.ArrayList;
 
 public class Printer {
 
-    private PrintStream ps = new PrintStream(new File("/home/sergey/Java/projects/SignalCompiler/src/tests/code/tests-result.txt"));
+    private PrintStream ps = new PrintStream(new File("/home/sergey/Java/projects/Compiler/SignalCompiler/src/tests/code/tests-result.txt"));
 
     public Printer() throws FileNotFoundException {}
 
-    public void printTokenListWithTokens(ArrayList<Token> tokenList, String testName) {
+    public void printTokenListWithTokens(ArrayList<ScannerToken> tokenList, String testName) {
         ps.println("--- START Test \"" + testName + "\" ---");
-        for (Token token: tokenList) {
-//            "Code: " + token.getCode() + " Line: " + token.getLineNumber() + " Token: " + getToken(token.getCode())
-            ps.format("Line: %4d Code: %4d Type: %13s Token: %15s\n",
+        for (ScannerToken token: tokenList) {
+            ps.format("Line: %4d Code: %4d Type: %13s ScannerToken: %15s\n",
                     token.getLineNumber(),
                     token.getCode(),
                     getTokenType(token.getCode()),

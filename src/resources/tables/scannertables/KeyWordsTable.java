@@ -1,4 +1,6 @@
-package resources;
+package resources.tables.scannertables;
+
+import resources.tables.Table;
 
 public class KeyWordsTable extends Table {
 
@@ -30,6 +32,7 @@ public class KeyWordsTable extends Table {
         table.put(115, "LOOP");
         table.put(116, "ENDLOOP");
         table.put(117, "GOTO");
+        table.put(118, "RETURN");
     }
 
 }

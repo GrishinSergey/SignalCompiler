@@ -1,7 +1,11 @@
 package scanner;
 
 import exceptions.ScannerException;
-import resources.*;
+import resources.tables.scannertables.ConstTable;
+import resources.tables.scannertables.DelimitersTable;
+import resources.tables.scannertables.IdentifiersTable;
+import resources.tables.scannertables.KeyWordsTable;
+import resources.token.ScannerToken;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -177,8 +181,8 @@ public class Scanner {
         tokens.add(new ScannerToken(tokenCode, lineNumber));
     }
 
-    public ArrayList<ScannerToken> getTokens() {
-        return tokens;
+    public ScannerList getTokens() {
+        return new ScannerList(tokens);
     }
 
 }

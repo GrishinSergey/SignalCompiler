@@ -1,32 +1,23 @@
 package tests;
 
+import exceptions.ParserException;
+import parser.Parser;
 import scanner.Scanner;
-import utils.Printer;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 
 public class Test {
 
-    private static Printer printer;
-
     public static void main(String[] args) {
-        runTest("Cyrillic test", "/home/sergey/Java/projects/Compiler/SignalCompiler/src/tests/code/test.sig");
-//        runTest("Usual comment test", "/home/sergey/Java/projects/SignalCompiler/src/tests/code/comments-1.sig");
-//        runTest("Non-closed comments test", "/home/sergey/Java/projects/SignalCompiler/src/tests/code/comments-2.sig");
-//        runTest("Without spaces comment test", "/home/sergey/Java/projects/SignalCompiler/src/tests/code/comments-3.sig");
-    }
-
-    private static void runTest(String testName, String filePath) {
+        String path = "/home/sergey/Java/projects/Compiler/SignalCompiler/src/tests/code/parser-test.sig";
         try {
-            if (printer == null) {
-                printer = new Printer();
-            }
-            printer.printTokenListWithTokens(new Scanner(filePath).generateTokenList().getTokens(), testName);
-        } catch (FileNotFoundException fnfe) {
-            System.out.println("Tests out-file not found");
-        } catch (IOException ioe) {
-            System.out.println("File \"" + testName + "\" with test not found or another exception cached");
+            List tree = new Parser(new Scanner(path).generateTokenList().getTokens()).runParser();
+            System.out.println(tree);
+        } catch (IOException e) {
+            System.out.println("file not found");
+        } catch (ParserException e) {
+            System.out.println(e.getMessage());
         }
     }
 

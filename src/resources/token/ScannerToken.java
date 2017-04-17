@@ -1,4 +1,4 @@
-package resources;
+package resources.token;
 
 public class ScannerToken {
 

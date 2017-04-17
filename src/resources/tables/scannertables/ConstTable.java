@@ -1,4 +1,6 @@
-package resources;
+package resources.tables.scannertables;
+
+import resources.tables.Table;
 
 public class ConstTable extends Table {
 

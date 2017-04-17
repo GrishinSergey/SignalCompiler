@@ -1,13 +1,13 @@
-package resources;
+package resources.tables;
 
 import java.util.HashMap;
 import java.util.Map;
 
-abstract class Table {
+abstract public class Table {
 
-    HashMap<Integer, String> table;
+    protected HashMap<Integer, String> table;
 
-    Table() {
+    protected Table() {
         table = new HashMap<>();
     }
 

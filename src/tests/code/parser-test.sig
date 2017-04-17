@@ -8,7 +8,10 @@ BEGIN
 
     ($ /home/sergey/Java/projects/Compiler/asm-insert.asm $)
 
-    IN 1265;
+    123: IN 1265;
     OUT 1256;
+
+    PROC1(A,B,C,G,U);
+    PROC2;
 
 END.

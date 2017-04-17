@@ -15,5 +15,7 @@ abstract public class ErrorMessages {
     public static final String UNEXPECTED_PATH_TO_ASSEMBLY_INSERT_FILE = "File with assembly insert doesn\'t exists. ";
     public static final String UNEXPECTED_END_OF_ASSEMBLY_INSERT = "Unexpected end of assembly insert. Expected $) ";
     public static final String UNEXPECTED_ASSEMBLY_INSERT_FILE = "Unexpected assembly insert file type. ";
+    public static final String UNEXPECTED_PROCEDURE_CALL = "Unexpected procedure call ";
+    public static final String UNEXPECTED_VARIABLES_LIST = "Unexpected list of variables ";
 
 }

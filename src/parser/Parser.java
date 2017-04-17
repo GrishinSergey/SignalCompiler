@@ -20,11 +20,12 @@ public class Parser {
             return new Program(scannerTokenList).getProgram();
         } catch (ParserException | IndexOutOfBoundsException e) {
             String errorMessage;
+            /* @TODO: check, is it need to get previous token? Can use current? */
             if (e instanceof IndexOutOfBoundsException) {
-                errorMessage = ErrorMessages.UNEXPECTED_END_OF_FILE + "on line: " + scannerTokenList.getPrevious().getLineNumber();
+                errorMessage = ErrorMessages.UNEXPECTED_END_OF_FILE + "on line: " + scannerTokenList.getCurrentScannerToken().getLineNumber();
             }
             else {
-                errorMessage = e.getMessage() + "on line: " + scannerTokenList.getPrevious().getLineNumber();
+                errorMessage = e.getMessage() + "on line: " + scannerTokenList.getCurrentScannerToken().getLineNumber();
             }
             throw new ParserException(errorMessage);
         }

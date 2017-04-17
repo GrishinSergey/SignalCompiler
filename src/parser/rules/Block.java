@@ -1,13 +1,13 @@
 package parser.rules;
 
-        import exceptions.ParserException;
-        import resources.ErrorMessages;
-        import resources.token.ParserToken;
-        import scanner.ScannerList;
+import exceptions.ParserException;
+import resources.ErrorMessages;
+import resources.token.ParserToken;
+import scanner.ScannerList;
 
-        import java.util.List;
+import java.util.List;
 
-public class Block {
+class Block {
 
     BlockToken getBlock(ScannerList scannerTokenList) throws ParserException {
         /* @TODO: add declarations */

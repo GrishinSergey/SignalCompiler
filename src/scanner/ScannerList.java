@@ -13,7 +13,7 @@ public class ScannerList {
     private List<ScannerToken> scannerTokenList;
     private ScannerToken previous;
 
-    ScannerList(List<ScannerToken> scannerTokenList) {
+    public ScannerList(List<ScannerToken> scannerTokenList) {
         this.scannerTokenList = scannerTokenList;
     }
 
@@ -35,8 +35,8 @@ public class ScannerList {
         return scannerTokenList.size() > 0;
     }
 
-    public String getToken(int id) {
-        return getTokenString(scannerTokenList.get(id).getCode());
+    public String getToken(int tokenCode) {
+        return getTokenString(tokenCode);
     }
 
     public String getToken() {

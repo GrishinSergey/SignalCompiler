@@ -10,7 +10,7 @@ import scanner.ScannerList;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Program {
+public class Program extends AbstractRule {
 
     private ScannerList scannerTokenList;
 
@@ -32,13 +32,9 @@ public class Program {
         List<ParserToken> res = new ArrayList<>();
         ScannerToken token = scannerTokenList.getCurrentScannerToken(),
                 nextToken = scannerTokenList.getRestOfScannerToken().getCurrentScannerToken();
-        if (200 > nextToken.getCode() || 500 <= nextToken.getCode()) {
-            throw new ParserException(ErrorMessages.UNEXPECTED_PROGRAM_NAME);
-        }
+        throwExceptionIfUnexpectedIdentifier(nextToken.getCode(), ErrorMessages.UNEXPECTED_PROGRAM_NAME);
         res.add(new ProgramToken("program", token.getLineNumber(), scannerTokenList.getToken()));
-        if (5 != scannerTokenList.getRestOfScannerToken().getCurrentScannerToken().getCode()) {
-            throw new ParserException(ErrorMessages.UNEXPECTED_END_OF_LINE);
-        }
+        throwExceptionIfUnexpectedEndOfLine(scannerTokenList.getRestOfScannerToken().getCurrentScannerToken().getCode());
         res.add(new Block().getBlock(scannerTokenList.getRestOfScannerToken()));
         if (10 != scannerTokenList.getRestOfScannerToken().getCurrentScannerToken().getCode()) {
             throw new ParserException(ErrorMessages.UNEXPECTED_END_OF_FILE);

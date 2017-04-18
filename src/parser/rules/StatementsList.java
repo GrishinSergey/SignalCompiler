@@ -10,43 +10,42 @@ import java.util.List;
 
 class StatementsList extends AbstractRule {
 
+    private List<ParserToken> res = new ArrayList<>();
+    private SingleStatement statement = new SingleStatement();
+
     List<ParserToken> getStatementsList(ScannerList scannerTokenList) throws ParserException {
-        List<ParserToken> res = new ArrayList<>();
-        SingleStatement statement = new SingleStatement();
         while (scannerTokenList.isNotEnded() &&
                 108 != scannerTokenList.getCurrentScannerToken().getCode() &&
                 116 != scannerTokenList.getCurrentScannerToken().getCode()) {
-
-            if (114 == scannerTokenList.getCurrentScannerToken().getCode()) {
-                res.add(statement.getLinkStatement(scannerTokenList.getRestOfScannerToken()));
-            } else if (117 == scannerTokenList.getCurrentScannerToken().getCode()) {
-                res.add(statement.getGotoStatement(scannerTokenList.getRestOfScannerToken()));
-            } else if (115 == scannerTokenList.getCurrentScannerToken().getCode()) {
-                res.add(statement.getLoopStatement(scannerTokenList.getRestOfScannerToken()));
-            } else if (118 == scannerTokenList.getCurrentScannerToken().getCode()) {
-                res.add(statement.getReturnStatement(scannerTokenList.getRestOfScannerToken()));
-            } else if (8 == scannerTokenList.getCurrentScannerToken().getCode()) {
-                res.add(statement.getAssemblyInsertStatement(scannerTokenList.getRestOfScannerToken()));
-            } else if (112 == scannerTokenList.getCurrentScannerToken().getCode()) {
-                res.add(statement.getInStatement(scannerTokenList.getRestOfScannerToken()));
-            } else if (113 == scannerTokenList.getCurrentScannerToken().getCode()) {
-                res.add(statement.getOutStatement(scannerTokenList.getRestOfScannerToken()));
-            } else if (5 == scannerTokenList.getCurrentScannerToken().getCode()) {
-                scannerTokenList.getRestOfScannerToken();
-                continue;
-            } else if (500 < scannerTokenList.getCurrentScannerToken().getCode()) {
-                res.add(statement.getLabelStatement(scannerTokenList));
-            } else if (isIdentifier(scannerTokenList.getCurrentScannerToken().getCode())) {
-                res.add(statement.getProcedureCallStatement(scannerTokenList.getRestOfScannerToken()));
-            } else {
-                System.out.println(scannerTokenList.getToken());
-                throw new ParserException(ErrorMessages.UNEXPECTED_TOKEN);
-            }
+            res.add(getStatement(scannerTokenList.getCurrentScannerToken().getCode(), scannerTokenList));
             scannerTokenList.getRestOfScannerToken();
         }
         return res;
     }
 
+    ParserToken getStatement(int code, ScannerList scannerTokenList) throws ParserException {
+          if (114 == code) {
+            return statement.getLinkStatement(scannerTokenList.getRestOfScannerToken());
+        } if (117 == code) {
+            return statement.getGotoStatement(scannerTokenList.getRestOfScannerToken());
+        } if (115 == code) {
+            return statement.getLoopStatement(scannerTokenList.getRestOfScannerToken());
+        } if (118 == code) {
+            return statement.getReturnStatement(scannerTokenList.getRestOfScannerToken());
+        } if (8 == code) {
+            return statement.getAssemblyInsertStatement(scannerTokenList.getRestOfScannerToken());
+        } if (112 == code) {
+            return statement.getInStatement(scannerTokenList.getRestOfScannerToken());
+        } if (113 == code) {
+            return statement.getOutStatement(scannerTokenList.getRestOfScannerToken());
+        } if (5 == code) {
+            return null;
+        } if (500 < code) {
+            return statement.getLabelStatement(scannerTokenList);
+        } if (isIdentifier(code)) {
+            return statement.getProcedureCallStatement(scannerTokenList.getRestOfScannerToken());
+        }
+        throw new ParserException(ErrorMessages.UNEXPECTED_TOKEN);
+    }
+
 }
-
-

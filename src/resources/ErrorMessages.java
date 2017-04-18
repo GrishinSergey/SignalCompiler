@@ -17,5 +17,6 @@ abstract public class ErrorMessages {
     public static final String UNEXPECTED_ASSEMBLY_INSERT_FILE = "Unexpected assembly insert file type. ";
     public static final String UNEXPECTED_PROCEDURE_CALL = "Unexpected procedure call ";
     public static final String UNEXPECTED_VARIABLES_LIST = "Unexpected list of variables ";
+    public static final String UNEXPECTED_DECLARATION = "Unexpected declaration ";
 
 }

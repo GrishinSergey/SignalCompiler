@@ -22,10 +22,10 @@ public class Parser {
             String errorMessage;
             /* @TODO: check, is it need to get previous token? Can use current? */
             if (e instanceof IndexOutOfBoundsException) {
-                errorMessage = ErrorMessages.UNEXPECTED_END_OF_FILE + "on line: " + scannerTokenList.getCurrentScannerToken().getLineNumber();
+                errorMessage = ErrorMessages.UNEXPECTED_END_OF_FILE + "on line " + scannerTokenList.getCurrentScannerToken().getLineNumber();
             }
             else {
-                errorMessage = e.getMessage() + "on line: " + scannerTokenList.getCurrentScannerToken().getLineNumber();
+                errorMessage = e.getMessage() + "on line " + scannerTokenList.getCurrentScannerToken().getLineNumber();
             }
             throw new ParserException(errorMessage);
         }

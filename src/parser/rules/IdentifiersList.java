@@ -13,7 +13,7 @@ class IdentifiersList extends AbstractRule {
     List<ParserToken> getIdentifiersList(ScannerList scannerTokenList) throws ParserException {
         throwExceptionIfUnexpectedIdentifier(scannerTokenList.getCurrentScannerToken().getCode());
         List<ParserToken> res = new ArrayList<>();
-        boolean flag = true;
+        boolean flag = false;
         while (scannerTokenList.isNotEnded() &&
                 (7 == scannerTokenList.getCurrentScannerToken().getCode() ||
                 isIdentifier(scannerTokenList.getCurrentScannerToken().getCode()))) {

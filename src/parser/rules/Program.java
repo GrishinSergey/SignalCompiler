@@ -35,7 +35,7 @@ public class Program extends AbstractRule {
         throwExceptionIfUnexpectedIdentifier(nextToken.getCode(), ErrorMessages.UNEXPECTED_PROGRAM_NAME);
         res.add(new ProgramToken("program", token.getLineNumber(), scannerTokenList.getToken()));
         throwExceptionIfUnexpectedEndOfLine(scannerTokenList.getRestOfScannerToken().getCurrentScannerToken().getCode());
-        res.add(new Block().getBlock(scannerTokenList.getRestOfScannerToken()));
+        res.add(new Block().getBlock(new DeclarationsList().getDeclarationsList(scannerTokenList.getRestOfScannerToken()), scannerTokenList));
         if (10 != scannerTokenList.getRestOfScannerToken().getCurrentScannerToken().getCode()) {
             throw new ParserException(ErrorMessages.UNEXPECTED_END_OF_FILE);
         }

@@ -13,7 +13,7 @@ public class ScannerList {
     private List<ScannerToken> scannerTokenList;
     private ScannerToken previous;
 
-    public ScannerList(List<ScannerToken> scannerTokenList) {
+    ScannerList(List<ScannerToken> scannerTokenList) {
         this.scannerTokenList = scannerTokenList;
     }
 
@@ -54,10 +54,6 @@ public class ScannerList {
             return IdentifiersTable.getInstance().getToken(tokenCode);
         }
         return ConstTable.getInstance().getToken(tokenCode);
-    }
-
-    public List<ScannerToken> getScannerTokenList() {
-        return scannerTokenList;
     }
 
 }

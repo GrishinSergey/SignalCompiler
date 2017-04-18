@@ -3,11 +3,9 @@ package parser.rules;
 import exceptions.ParserException;
 import resources.ErrorMessages;
 import resources.token.ParserToken;
-import resources.token.ScannerToken;
 import scanner.ScannerList;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -35,10 +33,10 @@ class SingleStatement extends AbstractRule {
         if (6 != scannerTokenList.getCurrentScannerToken().getCode()) {
             throw new ParserException(ErrorMessages.UNEXPECTED_PROCEDURE_CALL);
         }
-        List<ScannerToken> statementList = new ArrayList<>();
-        statementList.add(scannerTokenList.getRestOfScannerToken().getCurrentScannerToken());
         return new LabelStatementToken("label", lineNumber, labelIdentifier,
-                new StatementsList().getStatementsList(new ScannerList(statementList)).get(0));
+                new StatementsList().getStatement(
+                        scannerTokenList.getRestOfScannerToken().getCurrentScannerToken().getCode(),
+                        scannerTokenList));
     }
 
     LoopStatementToken getLoopStatement(ScannerList scannerTokenList) throws ParserException {
@@ -123,7 +121,7 @@ class SingleStatement extends AbstractRule {
         private String labelIdentifier;
         private ParserToken statement;
 
-        public LabelStatementToken(String token, int line, String labelIdentifier, ParserToken statement) {
+        LabelStatementToken(String token, int line, String labelIdentifier, ParserToken statement) {
             super(token, line);
             this.labelIdentifier = labelIdentifier;
             this.statement = statement;

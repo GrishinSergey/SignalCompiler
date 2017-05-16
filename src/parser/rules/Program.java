@@ -42,8 +42,11 @@ public class Program extends AbstractRule {
         return res;
     }
 
-    private List procedure() {
-        return null;
+    private List procedure() throws ParserException {
+        List<ParserToken> res = new ArrayList<>();
+        res.add(new ProcedureDeclarations().getProceduresDeclarations(scannerTokenList).get(0));
+        res.add(new Block().getBlock(new DeclarationsList().getDeclarationsList(scannerTokenList), scannerTokenList));
+        return res;
     }
 
     private class ProgramToken extends ParserToken {
@@ -55,30 +58,19 @@ public class Program extends AbstractRule {
             this.name = name;
         }
 
-        public String getName() {
-            return name;
-        }
-
     }
 
-    private class ProcedureToken extends ParserToken {
+    static class ProcedureToken extends ParserToken {
 
         private String name;
-        private List<ParserToken> params;
+        private List<String> params;
 
-        public ProcedureToken(String token, int line, String name, List<ParserToken> params) {
+        ProcedureToken(String token, int line, String name, List<String> params) {
             super(token, line);
             this.name = name;
             this.params = params;
         }
 
-        public String getName() {
-            return name;
-        }
-
-        public List<ParserToken> getParams() {
-            return params;
-        }
     }
 
 }

@@ -13,7 +13,6 @@ class DeclarationsList extends AbstractRule {
     List<List<ParserToken>> getDeclarationsList(ScannerList scannerTokenList) throws ParserException {
         List<List<ParserToken>> res = new ArrayList<>();
         while (scannerTokenList.isNotEnded() && 102 != scannerTokenList.getCurrentScannerToken().getCode()) {
-            System.out.println(scannerTokenList.getToken());
             res.add(getDeclaration(scannerTokenList));
         }
         return res;
@@ -23,9 +22,9 @@ class DeclarationsList extends AbstractRule {
         if (109 == scannerTokenList.getCurrentScannerToken().getCode()) {
             return new LabelDeclarations().getLabelsDeclarations(scannerTokenList.getRestOfScannerToken());
         } if (103 == scannerTokenList.getCurrentScannerToken().getCode()) {
-            return null;
+            return new VariableDeclarations().getVariablesDeclarations(scannerTokenList.getRestOfScannerToken());
         } if (101 == scannerTokenList.getCurrentScannerToken().getCode()) {
-            return null;
+            return new ProcedureDeclarations().getProceduresDeclarations(scannerTokenList);
         } if (111 == scannerTokenList.getCurrentScannerToken().getCode()) {
             return new FunctionDeclarations().getFunctionDeclarations(scannerTokenList.getRestOfScannerToken());
         }

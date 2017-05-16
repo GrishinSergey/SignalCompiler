@@ -1,7 +1,7 @@
 package parser.rules;
 
 import exceptions.ParserException;
-import resources.tables.parsertables.LabelsTable;
+import resources.tables.parsertables.LabelsParserTable;
 import resources.token.ParserToken;
 import scanner.ScannerList;
 
@@ -23,10 +23,11 @@ class LabelDeclarations extends AbstractRule {
                 }
                 flag = false;
             } else if (500 < scannerTokenList.getCurrentScannerToken().getCode()) {
-                LabelsTable.getInstance().add(scannerTokenList.getToken());
-                res.add(new LabelToken("label",
+                LabelToken lt = new LabelToken("label",
                         scannerTokenList.getCurrentScannerToken().getLineNumber(),
-                        scannerTokenList.getToken()));
+                        scannerTokenList.getToken());
+                res.add(lt);
+                LabelsParserTable.getInstance().add(lt);
                 if (flag) {
                     throw new ParserException("error in labels declaration ");
                 }

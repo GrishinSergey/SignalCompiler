@@ -1,20 +1,18 @@
 package resources.tables.scannertables;
 
-import resources.tables.Table;
+public class IdentifiersScannerTable extends AbstractScannerTable {
 
-public class IdentifiersTable extends Table {
-
-    private static IdentifiersTable instance;
+    private static IdentifiersScannerTable instance;
     private int tokenCode;
 
-    public static IdentifiersTable getInstance() {
+    public static IdentifiersScannerTable getInstance() {
         if (instance == null) {
-            instance = new IdentifiersTable();
+            instance = new IdentifiersScannerTable();
         }
         return instance;
     }
 
-    private IdentifiersTable() {
+    private IdentifiersScannerTable() {
         super();
         tokenCode = 200;
     }

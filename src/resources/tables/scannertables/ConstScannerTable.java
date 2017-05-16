@@ -1,20 +1,18 @@
 package resources.tables.scannertables;
 
-import resources.tables.Table;
+public class ConstScannerTable extends AbstractScannerTable {
 
-public class ConstTable extends Table {
-
-    private static ConstTable instance;
+    private static ConstScannerTable instance;
     private int tokenCode;
 
-    public static ConstTable getInstance() {
+    public static ConstScannerTable getInstance() {
         if (instance == null) {
-            instance = new ConstTable();
+            instance = new ConstScannerTable();
         }
         return instance;
     }
 
-    private ConstTable() {
+    private ConstScannerTable() {
         super();
         tokenCode = 500;
     }

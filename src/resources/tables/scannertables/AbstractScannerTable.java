@@ -1,13 +1,13 @@
-package resources.tables;
+package resources.tables.scannertables;
 
 import java.util.HashMap;
 import java.util.Map;
 
-abstract public class Table {
+abstract public class AbstractScannerTable {
 
-    protected HashMap<Integer, String> table;
+    HashMap<Integer, String> table;
 
-    protected Table() {
+    AbstractScannerTable() {
         table = new HashMap<>();
     }
 

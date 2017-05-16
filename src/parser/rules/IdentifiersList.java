@@ -2,6 +2,7 @@ package parser.rules;
 
 import exceptions.ParserException;
 import resources.ErrorMessages;
+import resources.tables.parsertables.VariablesParserTable;
 import resources.token.ParserToken;
 import scanner.ScannerList;
 
@@ -10,7 +11,7 @@ import java.util.List;
 
 class IdentifiersList extends AbstractRule {
 
-    List<ParserToken> getIdentifiersList(ScannerList scannerTokenList) throws ParserException {
+    List<ParserToken> getIdentifiersList(ScannerList scannerTokenList, boolean addToTableFlag) throws ParserException {
         throwExceptionIfUnexpectedIdentifier(scannerTokenList.getCurrentScannerToken().getCode());
         List<ParserToken> res = new ArrayList<>();
         boolean flag = false;
@@ -23,9 +24,13 @@ class IdentifiersList extends AbstractRule {
                 }
                 flag = false;
             } else if (isIdentifier(scannerTokenList.getCurrentScannerToken().getCode())) {
-                res.add(new IdentifierToken("variable",
+                IdentifierToken it = new IdentifierToken("variable",
                         scannerTokenList.getCurrentScannerToken().getLineNumber(),
-                        scannerTokenList.getToken()));
+                        scannerTokenList.getToken());
+                res.add(it);
+                if (addToTableFlag) {
+                    VariablesParserTable.getInstance().add(it);
+                }
                 if (flag) {
                     throw new ParserException(ErrorMessages.UNEXPECTED_VARIABLES_LIST);
                 }

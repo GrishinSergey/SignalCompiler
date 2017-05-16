@@ -1,19 +1,17 @@
 package resources.tables.scannertables;
 
-import resources.tables.Table;
+public class DelimitersScannerTable extends AbstractScannerTable {
 
-public class DelimitersTable extends Table {
+    private static DelimitersScannerTable instance;
 
-    private static DelimitersTable instance;
-
-    public static DelimitersTable getInstance() {
+    public static DelimitersScannerTable getInstance() {
         if (instance == null) {
-            instance = new DelimitersTable();
+            instance = new DelimitersScannerTable();
         }
         return instance;
     }
 
-    private DelimitersTable() {
+    private DelimitersScannerTable() {
         super();
         table.put(1, "(");
         table.put(2, ")");

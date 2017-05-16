@@ -21,7 +21,8 @@ class SingleStatement extends AbstractRule {
             throw new ParserException(ErrorMessages.UNEXPECTED_ASSEMBLY_INSERT_FILE);
         }
         if (9 != scannerTokenList.getRestOfScannerToken().getCurrentScannerToken().getCode()) {
-            throw new ParserException(ErrorMessages.UNEXPECTED_END_OF_ASSEMBLY_INSERT);
+            throw new ParserException(ErrorMessages.UNEXPECTED_END_OF_ASSEMBLY_INSERT,
+                    scannerTokenList.getPrevious().getLineNumber());
         }
         return new AssemblyInsertStatementToken("asm", lineNumber, file.getAbsolutePath());
     }
@@ -57,7 +58,7 @@ class SingleStatement extends AbstractRule {
             procedureCallStatementToken = new ProcedureCallStatementToken("procedurecall",
                     scannerTokenList.getCurrentScannerToken().getLineNumber(),
                     scannerTokenList.getToken(scannerTokenList.getPrevious().getCode()),
-                    new IdentifiersList().getIdentifiersList(scannerTokenList.getRestOfScannerToken()));
+                    new IdentifiersList().getIdentifiersList(scannerTokenList.getRestOfScannerToken(), false));
             if (2 != scannerTokenList.getCurrentScannerToken().getCode()) {
                 throw new ParserException(ErrorMessages.UNEXPECTED_PROCEDURE_CALL);
             }
@@ -67,7 +68,8 @@ class SingleStatement extends AbstractRule {
         if (procedureCallStatementToken == null) {
             procedureCallStatementToken = new ProcedureCallStatementToken("procedurecall",
                     scannerTokenList.getCurrentScannerToken().getLineNumber(),
-                    scannerTokenList.getToken(scannerTokenList.getPrevious().getCode()), null);
+                    scannerTokenList.getToken(scannerTokenList.getPrevious().getCode()),
+                    null);
         }
         return procedureCallStatementToken;
     }

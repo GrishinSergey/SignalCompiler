@@ -2,6 +2,8 @@ package resources;
 
 abstract public class ErrorMessages {
 
+    public static final String UNCLOSED_COMMENT = "Scanner error: unclosed comment in line ";
+
     public static final String UNEXPECTED_BEGIN_OF_PROGRAM = "Unexpected begin of program. Expected PROGRAM or PROCEDURE ";
     public static final String UNEXPECTED_END_OF_FILE = "Unexpected end of program ";
     public static final String UNEXPECTED_PROGRAM_NAME = "Unexpected program name. Expected Identifier ";

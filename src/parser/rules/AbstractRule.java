@@ -33,4 +33,8 @@ abstract class AbstractRule {
         return 200 < code && 500 > code;
     }
 
+    boolean isAttribute(int code) {
+        return 105 <= code && 107 >= code;
+    }
+
 }

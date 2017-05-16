@@ -1,5 +1,0 @@
-PROCEDURE (*
-
-BEGIN
-
-END

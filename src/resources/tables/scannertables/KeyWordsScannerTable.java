@@ -1,19 +1,17 @@
 package resources.tables.scannertables;
 
-import resources.tables.Table;
+public class KeyWordsScannerTable extends AbstractScannerTable {
 
-public class KeyWordsTable extends Table {
+    private static KeyWordsScannerTable instance;
 
-    private static KeyWordsTable instance;
-
-    public static KeyWordsTable getInstance() {
+    public static KeyWordsScannerTable getInstance() {
         if (instance == null) {
-            instance = new KeyWordsTable();
+            instance = new KeyWordsScannerTable();
         }
         return instance;
     }
 
-    private KeyWordsTable() {
+    private KeyWordsScannerTable() {
         super();
         table.put(101, "PROCEDURE");
         table.put(102, "BEGIN");

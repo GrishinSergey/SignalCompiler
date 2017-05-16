@@ -1,9 +1,9 @@
 package scanner;
 
-import resources.tables.scannertables.ConstTable;
-import resources.tables.scannertables.DelimitersTable;
-import resources.tables.scannertables.IdentifiersTable;
-import resources.tables.scannertables.KeyWordsTable;
+import resources.tables.scannertables.ConstScannerTable;
+import resources.tables.scannertables.DelimitersScannerTable;
+import resources.tables.scannertables.IdentifiersScannerTable;
+import resources.tables.scannertables.KeyWordsScannerTable;
 import resources.token.ScannerToken;
 
 import java.util.List;
@@ -45,15 +45,15 @@ public class ScannerList {
 
     private String getTokenString(int tokenCode) {
         if (tokenCode < 13) {
-            return DelimitersTable.getInstance().getToken(tokenCode);
+            return DelimitersScannerTable.getInstance().getToken(tokenCode);
         }
         if (tokenCode < 200) {
-            return KeyWordsTable.getInstance().getToken(tokenCode);
+            return KeyWordsScannerTable.getInstance().getToken(tokenCode);
         }
         if (tokenCode < 500) {
-            return IdentifiersTable.getInstance().getToken(tokenCode);
+            return IdentifiersScannerTable.getInstance().getToken(tokenCode);
         }
-        return ConstTable.getInstance().getToken(tokenCode);
+        return ConstScannerTable.getInstance().getToken(tokenCode);
     }
 
 }

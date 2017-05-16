@@ -2,7 +2,7 @@ package parser.rules;
 
 import exceptions.ParserException;
 import resources.ErrorMessages;
-import resources.tables.parsertables.FunctionsTable;
+import resources.tables.parsertables.FunctionsParserTable;
 import resources.token.ParserToken;
 import scanner.ScannerList;
 
@@ -22,7 +22,6 @@ class FunctionDeclarations  extends AbstractRule {
             if (12 != scannerTokenList.getRestOfScannerToken().getCurrentScannerToken().getCode()) {
                 throw new ParserException("expected assume ");
             }
-            /* @TODO: maybe here can be not only sinus */
             if (104 != scannerTokenList.getRestOfScannerToken().getCurrentScannerToken().getCode()) {
                 throw new ParserException("expected SIN ");
             }
@@ -41,8 +40,9 @@ class FunctionDeclarations  extends AbstractRule {
             int step = Integer.parseInt(scannerTokenList.getToken());
             throwExceptionIfUnexpectedEndOfLine(
                     scannerTokenList.getRestOfScannerToken().getCurrentScannerToken().getCode());
-            res.add(new FunctionToken("function", lineNumber, functionName, countValues, step, expression));
-            FunctionsTable.getInstance().add(functionName);
+            FunctionToken ft = new FunctionToken("function", lineNumber, functionName, countValues, step, expression);
+            res.add(ft);
+            FunctionsParserTable.getInstance().add(ft);
             scannerTokenList.getRestOfScannerToken();
         }
         return res;

@@ -3,6 +3,7 @@ package parser;
 import exceptions.ParserException;
 import parser.rules.Program;
 import resources.ErrorMessages;
+import resources.token.ParserToken;
 import scanner.ScannerList;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public class Parser {
         this.scannerTokenList = scannerTokenList;
     }
 
-    public List runParser() throws ParserException {
+    public List<ParserToken> runParser() throws ParserException {
         try {
             return new Program(scannerTokenList).getProgram();
         } catch (ParserException | IndexOutOfBoundsException e) {

@@ -8,7 +8,7 @@ import scanner.ScannerList;
 import java.util.ArrayList;
 import java.util.List;
 
-class LabelDeclarations extends AbstractRule {
+public class LabelDeclarations extends AbstractRule {
 
     List<ParserToken> getLabelsDeclarations(ScannerList scannerTokenList) throws ParserException {
         throwExceptionIfUnexpectedUnsignedInteger(scannerTokenList.getCurrentScannerToken().getCode());
@@ -43,13 +43,17 @@ class LabelDeclarations extends AbstractRule {
         return res;
     }
 
-    private class LabelToken extends ParserToken {
+    public class LabelToken extends ParserToken {
 
         private String labelIdentifier;
 
         LabelToken(String token, int line, String labelIdentifier) {
             super(token, line);
             this.labelIdentifier = labelIdentifier;
+        }
+
+        public String getLabelIdentifier() {
+            return labelIdentifier;
         }
 
     }

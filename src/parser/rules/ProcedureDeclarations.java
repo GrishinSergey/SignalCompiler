@@ -8,9 +8,9 @@ import scanner.ScannerList;
 import java.util.ArrayList;
 import java.util.List;
 
-class ProcedureDeclarations extends AbstractRule {
+public class ProcedureDeclarations extends AbstractRule {
 
-    List<ParserToken> getProceduresDeclarations(ScannerList scannerTokenList) throws ParserException {
+    List<ParserToken> getProceduresDeclarations(ScannerList scannerTokenList, String ruleName) throws ParserException {
         List<ParserToken> res = new ArrayList<>();
         while (scannerTokenList.isNotEnded() &&
                 102 != scannerTokenList.getCurrentScannerToken().getCode() &&
@@ -46,7 +46,7 @@ class ProcedureDeclarations extends AbstractRule {
                     }
                     scannerTokenList.getRestOfScannerToken();
                 }
-                procedureToken = new Program.ProcedureToken("proceduredef", lineNumber, procedureName, attributes);
+                procedureToken = new Program.ProcedureToken(ruleName, lineNumber, procedureName, attributes);
                 if (2 != scannerTokenList.getCurrentScannerToken().getCode()) {
                     throw new ParserException("Expected ) ");
                 }
@@ -54,7 +54,7 @@ class ProcedureDeclarations extends AbstractRule {
             }
             throwExceptionIfUnexpectedEndOfLine(scannerTokenList.getCurrentScannerToken().getCode());
             if (procedureToken == null) {
-                procedureToken = new Program.ProcedureToken("proceduredef", lineNumber, procedureName, null);
+                procedureToken = new Program.ProcedureToken(ruleName, lineNumber, procedureName, null);
             }
             res.add(procedureToken);
             ProceduresParserTable.getInstance().add(procedureToken);

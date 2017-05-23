@@ -18,7 +18,7 @@ public class Program extends AbstractRule {
         this.scannerTokenList = scannerTokenList;
     }
 
-    public List getProgram() throws ParserException {
+    public List<ParserToken> getProgram() throws ParserException {
         if (110 == scannerTokenList.getCurrentScannerToken().getCode()) {
             return program();
         }
@@ -28,12 +28,12 @@ public class Program extends AbstractRule {
         throw new ParserException(ErrorMessages.UNEXPECTED_BEGIN_OF_PROGRAM);
     }
 
-    private List program() throws ParserException {
+    private List<ParserToken> program() throws ParserException {
         List<ParserToken> res = new ArrayList<>();
         ScannerToken token = scannerTokenList.getCurrentScannerToken(),
                 nextToken = scannerTokenList.getRestOfScannerToken().getCurrentScannerToken();
         throwExceptionIfUnexpectedIdentifier(nextToken.getCode(), ErrorMessages.UNEXPECTED_PROGRAM_NAME);
-        res.add(new ProgramToken("program", token.getLineNumber(), scannerTokenList.getToken()));
+        res.add(new ProgramToken("programDeclaration", token.getLineNumber(), scannerTokenList.getToken()));
         throwExceptionIfUnexpectedEndOfLine(scannerTokenList.getRestOfScannerToken().getCurrentScannerToken().getCode());
         res.add(new Block().getBlock(new DeclarationsList().getDeclarationsList(scannerTokenList.getRestOfScannerToken()), scannerTokenList));
         if (10 != scannerTokenList.getRestOfScannerToken().getCurrentScannerToken().getCode()) {
@@ -42,14 +42,14 @@ public class Program extends AbstractRule {
         return res;
     }
 
-    private List procedure() throws ParserException {
+    private List<ParserToken> procedure() throws ParserException {
         List<ParserToken> res = new ArrayList<>();
-        res.add(new ProcedureDeclarations().getProceduresDeclarations(scannerTokenList).get(0));
+        res.add(new ProcedureDeclarations().getProceduresDeclarations(scannerTokenList, "procedureDeclaration").get(0));
         res.add(new Block().getBlock(new DeclarationsList().getDeclarationsList(scannerTokenList), scannerTokenList));
         return res;
     }
 
-    private class ProgramToken extends ParserToken {
+    public static class ProgramToken extends ParserToken {
 
         private String name;
 
@@ -58,17 +58,30 @@ public class Program extends AbstractRule {
             this.name = name;
         }
 
+        public String getName() {
+            return name;
+        }
+
     }
 
-    static class ProcedureToken extends ParserToken {
+    public static class ProcedureToken extends ParserToken {
 
         private String name;
+
         private List<String> params;
 
         ProcedureToken(String token, int line, String name, List<String> params) {
             super(token, line);
             this.name = name;
             this.params = params;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public List<String> getParams() {
+            return params;
         }
 
     }

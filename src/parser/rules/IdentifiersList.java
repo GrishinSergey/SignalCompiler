@@ -9,7 +9,7 @@ import scanner.ScannerList;
 import java.util.ArrayList;
 import java.util.List;
 
-class IdentifiersList extends AbstractRule {
+public class IdentifiersList extends AbstractRule {
 
     List<ParserToken> getIdentifiersList(ScannerList scannerTokenList, boolean addToTableFlag) throws ParserException {
         throwExceptionIfUnexpectedIdentifier(scannerTokenList.getCurrentScannerToken().getCode());
@@ -43,13 +43,17 @@ class IdentifiersList extends AbstractRule {
         return res;
     }
 
-    private class IdentifierToken extends ParserToken {
+    public class IdentifierToken extends ParserToken {
 
         private String name;
 
         IdentifierToken(String token, int line, String name) {
             super(token, line);
             this.name = name;
+        }
+
+        public String getName() {
+            return name;
         }
     }
 

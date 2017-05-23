@@ -7,10 +7,9 @@ import scanner.ScannerList;
 
 import java.util.List;
 
-class Block {
+public class Block {
 
     BlockToken getBlock(List<List<ParserToken>> declarations, ScannerList scannerTokenList) throws ParserException {
-        /* @TODO: add declarations */
         if (102 != scannerTokenList.getCurrentScannerToken().getCode()) {
             throw new ParserException(ErrorMessages.UNEXPECTED_START_OF_BLOCK);
         }
@@ -19,7 +18,7 @@ class Block {
                 new StatementsList().getStatementsList(scannerTokenList.getRestOfScannerToken()));
     }
 
-    private class BlockToken extends ParserToken {
+    public class BlockToken extends ParserToken {
 
         private List<List<ParserToken>> declarations;
         private List<ParserToken> statements;
@@ -28,6 +27,14 @@ class Block {
             super(token, line);
             this.declarations = declarations;
             this.statements = statements;
+        }
+
+        public List<List<ParserToken>> getDeclarations() {
+            return declarations;
+        }
+
+        public List<ParserToken> getStatements() {
+            return statements;
         }
     }
 

@@ -3,7 +3,7 @@ package resources.tables.scannertables;
 import java.util.HashMap;
 import java.util.Map;
 
-abstract public class AbstractScannerTable {
+abstract class AbstractScannerTable {
 
     HashMap<Integer, String> table;
 

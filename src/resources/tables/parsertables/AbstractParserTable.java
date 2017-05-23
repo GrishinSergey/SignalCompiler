@@ -7,7 +7,7 @@ import java.util.Map;
 
 abstract class AbstractParserTable {
 
-    HashMap<Integer, ParserToken> table;
+    private HashMap<Integer, ParserToken> table;
     private int index;
 
     AbstractParserTable() {

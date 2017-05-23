@@ -9,7 +9,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Objects;
 
-class SingleStatement extends AbstractRule {
+public class SingleStatement extends AbstractRule {
 
     AssemblyInsertStatementToken getAssemblyInsertStatement(ScannerList scannerTokenList) throws ParserException {
         File file = new File(scannerTokenList.getToken());
@@ -118,10 +118,10 @@ class SingleStatement extends AbstractRule {
         return new ReturnStatementToken("return", scannerTokenList.getCurrentScannerToken().getLineNumber());
     }
 
-    private class LabelStatementToken extends ParserToken {
+    public class LabelStatementToken extends ParserToken {
 
-        private String labelIdentifier;
         private ParserToken statement;
+        private String labelIdentifier;
 
         LabelStatementToken(String token, int line, String labelIdentifier, ParserToken statement) {
             super(token, line);
@@ -129,9 +129,17 @@ class SingleStatement extends AbstractRule {
             this.statement = statement;
         }
 
+        public ParserToken getStatement() {
+            return statement;
+        }
+
+        public String getLabelIdentifier() {
+            return labelIdentifier;
+        }
+
     }
 
-    private class AssemblyInsertStatementToken extends ParserToken {
+    public class AssemblyInsertStatementToken extends ParserToken {
 
         private String pathToAsmFile;
 
@@ -140,9 +148,13 @@ class SingleStatement extends AbstractRule {
             this.pathToAsmFile = pathToAsmFile;
         }
 
+        public String getPathToAsmFile() {
+            return pathToAsmFile;
+        }
+
     }
 
-    private class LoopStatementToken extends ParserToken {
+    public class LoopStatementToken extends ParserToken {
 
         private List<ParserToken> statements;
 
@@ -151,9 +163,13 @@ class SingleStatement extends AbstractRule {
             this.statements = statements;
         }
 
+        public List<ParserToken> getStatements() {
+            return statements;
+        }
+
     }
 
-    private class ProcedureCallStatementToken extends ParserToken {
+    public class ProcedureCallStatementToken extends ParserToken {
 
         private String procedureName;
         private List<ParserToken> parameters;
@@ -163,9 +179,17 @@ class SingleStatement extends AbstractRule {
             this.procedureName = procedureName;
             this.parameters = parameters;
         }
+
+        public List<ParserToken> getParameters() {
+            return parameters;
+        }
+
+        public String getProcedureName() {
+            return procedureName;
+        }
     }
 
-    private class GotoStatementToken extends ParserToken {
+    public class GotoStatementToken extends ParserToken {
 
         private String labelIdentifier;
 
@@ -174,9 +198,13 @@ class SingleStatement extends AbstractRule {
             this.labelIdentifier = labelIdentifier;
         }
 
+        public String getLabelIdentifier() {
+            return labelIdentifier;
+        }
+
     }
 
-    private class InStatementToken extends ParserToken {
+    public class InStatementToken extends ParserToken {
 
         private String inSteam;
 
@@ -185,9 +213,13 @@ class SingleStatement extends AbstractRule {
             this.inSteam = inSteam;
         }
 
+        public String getInSteam() {
+            return inSteam;
+        }
+
     }
 
-    private class OutStatementToken extends ParserToken {
+    public class OutStatementToken extends ParserToken {
 
         private String outSteam;
 
@@ -196,9 +228,13 @@ class SingleStatement extends AbstractRule {
             this.outSteam = outSteam;
         }
 
+        public String getOutSteam() {
+            return outSteam;
+        }
+
     }
 
-    private class LinkStatementToken extends ParserToken {
+    public class LinkStatementToken extends ParserToken {
 
         private String variable;
         private String value;
@@ -209,9 +245,17 @@ class SingleStatement extends AbstractRule {
             this.value = value;
         }
 
+        public String getVariable() {
+            return variable;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
     }
 
-    private class ReturnStatementToken extends ParserToken {
+    public class ReturnStatementToken extends ParserToken {
 
         ReturnStatementToken(String token, int line) {
             super(token, line);

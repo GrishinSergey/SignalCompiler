@@ -7,7 +7,7 @@ import scanner.ScannerList;
 import java.util.ArrayList;
 import java.util.List;
 
-class VariableDeclarations extends AbstractRule {
+public class VariableDeclarations extends AbstractRule {
 
     List<ParserToken> getVariablesDeclarations(ScannerList scannerTokenList) throws ParserException {
         List<ParserToken> res = new ArrayList<>();
@@ -35,7 +35,7 @@ class VariableDeclarations extends AbstractRule {
         return res;
     }
 
-    private class VariableDeclarationToken extends ParserToken {
+    public class VariableDeclarationToken extends ParserToken {
 
         private String type;
         private List<ParserToken> identifiers;
@@ -44,6 +44,14 @@ class VariableDeclarations extends AbstractRule {
             super(token, line);
             this.type = type;
             this.identifiers = identifiers;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public List<ParserToken> getIdentifiers() {
+            return identifiers;
         }
     }
 

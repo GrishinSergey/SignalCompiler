@@ -8,7 +8,7 @@ import scanner.ScannerList;
 import java.util.ArrayList;
 import java.util.List;
 
-class DeclarationsList extends AbstractRule {
+public class DeclarationsList extends AbstractRule {
 
     List<List<ParserToken>> getDeclarationsList(ScannerList scannerTokenList) throws ParserException {
         List<List<ParserToken>> res = new ArrayList<>();
@@ -24,7 +24,7 @@ class DeclarationsList extends AbstractRule {
         } if (103 == scannerTokenList.getCurrentScannerToken().getCode()) {
             return new VariableDeclarations().getVariablesDeclarations(scannerTokenList.getRestOfScannerToken());
         } if (101 == scannerTokenList.getCurrentScannerToken().getCode()) {
-            return new ProcedureDeclarations().getProceduresDeclarations(scannerTokenList);
+            return new ProcedureDeclarations().getProceduresDeclarations(scannerTokenList,"procedureDef");
         } if (111 == scannerTokenList.getCurrentScannerToken().getCode()) {
             return new FunctionDeclarations().getFunctionDeclarations(scannerTokenList.getRestOfScannerToken());
         }

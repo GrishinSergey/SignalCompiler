@@ -8,17 +8,22 @@ import scanner.ScannerList;
 import java.util.ArrayList;
 import java.util.List;
 
-class StatementsList extends AbstractRule {
+public class StatementsList extends AbstractRule {
 
     private List<ParserToken> res = new ArrayList<>();
     private SingleStatement statement = new SingleStatement();
 
     List<ParserToken> getStatementsList(ScannerList scannerTokenList) throws ParserException {
+        ParserToken parserToken;
         while (scannerTokenList.isNotEnded() &&
                 108 != scannerTokenList.getCurrentScannerToken().getCode() &&
                 116 != scannerTokenList.getCurrentScannerToken().getCode()) {
-            res.add(getStatement(scannerTokenList.getCurrentScannerToken().getCode(), scannerTokenList));
+            parserToken = getStatement(scannerTokenList.getCurrentScannerToken().getCode(), scannerTokenList);
             scannerTokenList.getRestOfScannerToken();
+            if (null == parserToken) {
+                continue;
+            }
+            res.add(parserToken);
         }
         return res;
     }

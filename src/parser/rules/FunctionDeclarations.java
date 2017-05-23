@@ -9,7 +9,7 @@ import scanner.ScannerList;
 import java.util.ArrayList;
 import java.util.List;
 
-class FunctionDeclarations  extends AbstractRule {
+public class FunctionDeclarations  extends AbstractRule {
 
     List<ParserToken> getFunctionDeclarations(ScannerList scannerTokenList) throws ParserException {
         List<ParserToken> res = new ArrayList<>();
@@ -48,7 +48,7 @@ class FunctionDeclarations  extends AbstractRule {
         return res;
     }
 
-    private class FunctionToken extends ParserToken {
+    public class FunctionToken extends ParserToken {
 
         private String name;
         private int countValues;
@@ -61,6 +61,22 @@ class FunctionDeclarations  extends AbstractRule {
             this.countValues = countValues;
             this.step = step;
             this.expression = expression;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public int getCountValues() {
+            return countValues;
+        }
+
+        public int getStep() {
+            return step;
+        }
+
+        public String getExpression() {
+            return expression;
         }
 
         public double[] calculateFunctionValues() {

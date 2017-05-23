@@ -14,7 +14,7 @@ public class Test {
     public static void main(String[] args) {
         String path = "/home/sergey/Java/projects/JavaNative/Compiler/SignalCompiler/src/tests/code/";
 
-//        runTest(path, "declaration-procedure.sig");
+        runTest(path, "declaration-procedure.sig");
 //        runTest(path, "declaration-program.txt");
 //        runTest(path, "without-declarations.sig");
 //        runTest(path, "error-asm-insert.sig");

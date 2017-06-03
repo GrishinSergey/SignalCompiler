@@ -1,10 +1,12 @@
 package scanner;
 
+
 import resources.tables.scannertables.ConstScannerTable;
 import resources.tables.scannertables.DelimitersScannerTable;
 import resources.tables.scannertables.IdentifiersScannerTable;
 import resources.tables.scannertables.KeyWordsScannerTable;
 import resources.token.ScannerToken;
+
 
 import java.util.List;
 

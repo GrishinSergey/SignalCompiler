@@ -9,6 +9,7 @@ import scanner.ScannerList;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class FunctionDeclarations  extends AbstractRule {
 
     List<ParserToken> getFunctionDeclarations(ScannerList scannerTokenList) throws ParserException {
@@ -20,14 +21,14 @@ public class FunctionDeclarations  extends AbstractRule {
             String functionName = scannerTokenList.getToken();
             int lineNumber = scannerTokenList.getCurrentScannerToken().getLineNumber();
             if (12 != scannerTokenList.getRestOfScannerToken().getCurrentScannerToken().getCode()) {
-                throw new ParserException("expected assume ");
+                throw new ParserException(ErrorMessages.UNEXPECTED_ASSUMING_OF_FUNCTION_BODY);
             }
             if (104 != scannerTokenList.getRestOfScannerToken().getCurrentScannerToken().getCode()) {
-                throw new ParserException("expected SIN ");
+                throw new ParserException(ErrorMessages.UNEXPECTED_EXPRESSION_OF_FUNCTION);
             }
             String expression = scannerTokenList.getToken();
             if (11 != scannerTokenList.getRestOfScannerToken().getCurrentScannerToken().getCode()) {
-                throw new ParserException("expected \\ ");
+                throw new ParserException(ErrorMessages.UNEXPECTED_FUNCTIONS_ATTRIBUTE);
             }
             throwExceptionIfUnexpectedUnsignedInteger(
                     scannerTokenList.getRestOfScannerToken().getCurrentScannerToken().getCode());
@@ -54,6 +55,7 @@ public class FunctionDeclarations  extends AbstractRule {
         private int countValues;
         private int step;
         private String expression;
+        private double[] values;
 
         FunctionToken(String token, int line, String name, int countValues, int step, String expression) {
             super(token, line);
@@ -61,6 +63,7 @@ public class FunctionDeclarations  extends AbstractRule {
             this.countValues = countValues;
             this.step = step;
             this.expression = expression;
+            this.values = calculateFunctionValues();
         }
 
         public String getName() {
@@ -79,8 +82,12 @@ public class FunctionDeclarations  extends AbstractRule {
             return expression;
         }
 
-        public double[] calculateFunctionValues() {
-            double [] d = new double[countValues];
+        public double[] getValues() {
+            return values;
+        }
+
+        private double[] calculateFunctionValues() {
+            double [] d = new double[countValues / step];
             for (int i = 0, j = 0; i < countValues; i += step, j++) {
                 d[j] = Math.sin(i);
             }

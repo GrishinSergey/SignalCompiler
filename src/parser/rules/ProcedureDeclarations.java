@@ -1,6 +1,7 @@
 package parser.rules;
 
 import exceptions.ParserException;
+import resources.ErrorMessages;
 import resources.tables.parsertables.ProceduresParserTable;
 import resources.token.ParserToken;
 import scanner.ScannerList;
@@ -32,23 +33,23 @@ public class ProcedureDeclarations extends AbstractRule {
                         7 == scannerTokenList.getCurrentScannerToken().getCode())) {
                     if (7 == scannerTokenList.getCurrentScannerToken().getCode()) {
                         if (!flag) {
-                            throw new ParserException();
+                            throw new ParserException(ErrorMessages.UNEXPECTED_ATTRIBUTE_IN_PROCEDURE_DECLARATION);
                         }
                         flag = false;
                     } else if (isAttribute(scannerTokenList.getCurrentScannerToken().getCode())) {
                         attributes.add(scannerTokenList.getToken());
                         if (flag) {
-                            throw new ParserException("Unexpected attribute ");
+                            throw new ParserException(ErrorMessages.UNEXPECTED_ATTRIBUTE_IN_PROCEDURE_DECLARATION);
                         }
                         flag = true;
                     } else {
-                        throw new ParserException("Unexpected attribute ");
+                        throw new ParserException(ErrorMessages.UNEXPECTED_ATTRIBUTE_IN_PROCEDURE_DECLARATION);
                     }
                     scannerTokenList.getRestOfScannerToken();
                 }
                 procedureToken = new Program.ProcedureToken(ruleName, lineNumber, procedureName, attributes);
                 if (2 != scannerTokenList.getCurrentScannerToken().getCode()) {
-                    throw new ParserException("Expected ) ");
+                    throw new ParserException(ErrorMessages.UNEXPECTED_END_OF_ATTRIBUTE_LIST);
                 }
                 scannerTokenList.getRestOfScannerToken();
             }

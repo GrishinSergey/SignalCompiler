@@ -35,7 +35,10 @@ public class Program extends AbstractRule {
         throwExceptionIfUnexpectedIdentifier(nextToken.getCode(), ErrorMessages.UNEXPECTED_PROGRAM_NAME);
         res.add(new ProgramToken("programDeclaration", token.getLineNumber(), scannerTokenList.getToken()));
         throwExceptionIfUnexpectedEndOfLine(scannerTokenList.getRestOfScannerToken().getCurrentScannerToken().getCode());
-        res.add(new Block().getBlock(new DeclarationsList().getDeclarationsList(scannerTokenList.getRestOfScannerToken()), scannerTokenList));
+        res.add(new Block().getBlock(
+                new DeclarationsList().getDeclarationsList(scannerTokenList.getRestOfScannerToken()),
+                scannerTokenList
+        ));
         if (10 != scannerTokenList.getRestOfScannerToken().getCurrentScannerToken().getCode()) {
             throw new ParserException(ErrorMessages.UNEXPECTED_END_OF_FILE);
         }
@@ -45,7 +48,10 @@ public class Program extends AbstractRule {
     private List<ParserToken> procedure() throws ParserException {
         List<ParserToken> res = new ArrayList<>();
         res.add(new ProcedureDeclarations().getProceduresDeclarations(scannerTokenList, "procedureDeclaration").get(0));
-        res.add(new Block().getBlock(new DeclarationsList().getDeclarationsList(scannerTokenList), scannerTokenList));
+        res.add(new Block().getBlock(
+                new DeclarationsList().getDeclarationsList(scannerTokenList),
+                scannerTokenList
+        ));
         return res;
     }
 
@@ -67,7 +73,6 @@ public class Program extends AbstractRule {
     public static class ProcedureToken extends ParserToken {
 
         private String name;
-
         private List<String> params;
 
         ProcedureToken(String token, int line, String name, List<String> params) {
@@ -82,6 +87,11 @@ public class Program extends AbstractRule {
 
         public List<String> getParams() {
             return params;
+        }
+
+        @Override
+        public String toString() {
+            return name;
         }
 
     }

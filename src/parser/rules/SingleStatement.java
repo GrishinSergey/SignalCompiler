@@ -58,7 +58,7 @@ public class SingleStatement extends AbstractRule {
             procedureCallStatementToken = new ProcedureCallStatementToken("procedurecall",
                     scannerTokenList.getCurrentScannerToken().getLineNumber(),
                     scannerTokenList.getToken(scannerTokenList.getPrevious().getCode()),
-                    new IdentifiersList().getIdentifiersList(scannerTokenList.getRestOfScannerToken(), false));
+                    new IdentifiersList().getIdentifiersList(scannerTokenList.getRestOfScannerToken()));
             if (2 != scannerTokenList.getCurrentScannerToken().getCode()) {
                 throw new ParserException(ErrorMessages.UNEXPECTED_PROCEDURE_CALL);
             }

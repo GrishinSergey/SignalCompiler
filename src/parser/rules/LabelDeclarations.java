@@ -1,6 +1,7 @@
 package parser.rules;
 
 import exceptions.ParserException;
+import resources.ErrorMessages;
 import resources.tables.parsertables.LabelsParserTable;
 import resources.token.ParserToken;
 import scanner.ScannerList;
@@ -19,7 +20,7 @@ public class LabelDeclarations extends AbstractRule {
                  7 == scannerTokenList.getCurrentScannerToken().getCode())) {
             if (7 == scannerTokenList.getCurrentScannerToken().getCode()) {
                 if (!flag) {
-                    throw new ParserException("error in labels declaration ");
+                    throw new ParserException(ErrorMessages.UNEXPECTED_LABEL_DECLARATION);
                 }
                 flag = false;
             } else if (500 < scannerTokenList.getCurrentScannerToken().getCode()) {
@@ -29,11 +30,11 @@ public class LabelDeclarations extends AbstractRule {
                 res.add(lt);
                 LabelsParserTable.getInstance().add(lt);
                 if (flag) {
-                    throw new ParserException("error in labels declaration ");
+                    throw new ParserException(ErrorMessages.UNEXPECTED_LABEL_DECLARATION);
                 }
                 flag = true;
             } else {
-                throw new ParserException("error in labels declaration ");
+                throw new ParserException(ErrorMessages.UNEXPECTED_LABEL_DECLARATION);
             }
             scannerTokenList.getRestOfScannerToken();
         }
@@ -45,17 +46,21 @@ public class LabelDeclarations extends AbstractRule {
 
     public class LabelToken extends ParserToken {
 
-        private String labelIdentifier;
+        private String name;
 
-        LabelToken(String token, int line, String labelIdentifier) {
+        LabelToken(String token, int line, String name) {
             super(token, line);
-            this.labelIdentifier = labelIdentifier;
+            this.name = name;
         }
 
-        public String getLabelIdentifier() {
-            return labelIdentifier;
+        public String getName() {
+            return name;
         }
 
+        @Override
+        public String toString() {
+            return name;
+        }
     }
 
 }

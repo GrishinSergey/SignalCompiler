@@ -1,27 +1,22 @@
 package resources.tables.scannertables;
 
-import java.util.HashMap;
+import resources.tables.AbstractTable;
+
 import java.util.Map;
 
-abstract class AbstractScannerTable {
-
-    HashMap<Integer, String> table;
+abstract class AbstractScannerTable extends AbstractTable<String> {
 
     AbstractScannerTable() {
-        table = new HashMap<>();
+        super();
     }
 
     public int getTokenCode(String token) {
-        for (Map.Entry lex : table.entrySet()) {
-            if (token.equals(lex.getValue().toString())) {
-                return Integer.valueOf(lex.getKey().toString());
+        for (Map.Entry t: table.entrySet()) {
+            if (token.equals(t.getValue().toString())) {
+                return (int) t.getKey();
             }
         }
         return -1;
-    }
-
-    public String getToken(int tokenCode) {
-        return table.get(tokenCode);
     }
 
 }

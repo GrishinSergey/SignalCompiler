@@ -20,5 +20,12 @@ abstract public class ErrorMessages {
     public static final String UNEXPECTED_PROCEDURE_CALL = "Unexpected procedure call ";
     public static final String UNEXPECTED_VARIABLES_LIST = "Unexpected list of variables ";
     public static final String UNEXPECTED_DECLARATION = "Unexpected declaration ";
+    public static final String UNEXPECTED_SYMBOL_IN_VAR_DECLARATION = "Unexpected symbol in variable declaration. Expected : ";
+    public static final String UNEXPECTED_ATTRIBUTE_IN_PROCEDURE_DECLARATION = "Unexpected attribute ";
+    public static final String UNEXPECTED_END_OF_ATTRIBUTE_LIST = "Expected ) ";
+    public static final String UNEXPECTED_EXPRESSION_OF_FUNCTION = "expected SIN ";
+    public static final String UNEXPECTED_FUNCTIONS_ATTRIBUTE = "expected \\ ";
+    public static final String UNEXPECTED_ASSUMING_OF_FUNCTION_BODY = "expected assume ";
+    public static final String UNEXPECTED_LABEL_DECLARATION = "error in labels declaration ";
 
 }

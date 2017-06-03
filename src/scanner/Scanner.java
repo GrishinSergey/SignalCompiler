@@ -1,5 +1,6 @@
 package scanner;
 
+
 import exceptions.ScannerException;
 import resources.ErrorMessages;
 import resources.tables.scannertables.ConstScannerTable;
@@ -12,6 +13,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
+
 
 public class Scanner {
 
@@ -27,7 +30,7 @@ public class Scanner {
         lineNumber = 1;
     }
 
-    public Scanner generateTokenList() throws IOException, ScannerException {
+    public Scanner runScanner() throws IOException, ScannerException {
         int tokenCode;
         String token;
         do {
@@ -101,7 +104,13 @@ public class Scanner {
                     throw new ScannerException();
                 }
             } catch (ScannerException se) {
-                throw new ScannerException(se.getMessage() + lineNumber);
+                if (!Objects.equals(se.getMessage(), null)) {
+                    throw new ScannerException(se.getMessage());
+                }
+                else {
+                    throw new ScannerException(ErrorMessages.UNEXPECTED_TOKEN + "on line " + lineNumber);
+
+                }
             }
         } while (chr != -1);
         reader.close();
@@ -143,6 +152,7 @@ public class Scanner {
 
     private void getComment() throws IOException, ScannerException {
         boolean closedCommentFlag = false;
+        int firstCommentLine = lineNumber;
         while (chr != -1) {
             if (chr == 42) {
                 chr = reader.read();
@@ -159,7 +169,7 @@ public class Scanner {
             }
         }
         if (!closedCommentFlag) {
-            throw new ScannerException(ErrorMessages.UNCLOSED_COMMENT);
+            throw new ScannerException(ErrorMessages.UNCLOSED_COMMENT + firstCommentLine);
         }
         chr = reader.read();
     }

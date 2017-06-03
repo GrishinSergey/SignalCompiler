@@ -31,6 +31,7 @@ public class KeyWordsScannerTable extends AbstractScannerTable {
         table.put(116, "ENDLOOP");
         table.put(117, "GOTO");
         table.put(118, "RETURN");
+        table.put(119, "CONST");
     }
 
 }

@@ -1,6 +1,5 @@
 package resources.token;
 
-
 public class ParserToken {
 
     protected String token;

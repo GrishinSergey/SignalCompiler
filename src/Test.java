@@ -1,7 +1,7 @@
-package tests;
-
+import exceptions.GeneratorException;
 import exceptions.ParserException;
 import exceptions.ScannerException;
+import generator.CodeGenerator;
 import parser.Parser;
 import resources.token.ParserToken;
 import scanner.Scanner;
@@ -27,14 +27,16 @@ public class Test {
 
     private static void runTest(String path, String testName) {
         try {
-            List<ParserToken> tree = new Parser(new Scanner(path + testName).generateTokenList().getTokens()).runParser();
-            new PrintTree().print(tree);
+            List<ParserToken> tree = new Parser(new Scanner(path + testName).runScanner().getTokens()).runParser();
+            new CodeGenerator(tree).runGenerator();
             System.out.println("correct test \"" + testName + "\" finished\n-----");
         } catch (IOException e) {
             System.out.println("file not found");
         } catch (ScannerException | ParserException e) {
             System.out.println("error test \"" + testName + "\" finished with message:");
             System.out.println(e.getMessage() + "\n-----");
+        } catch (GeneratorException e) {
+            System.out.println("Generator Exception");
         }
     }
 

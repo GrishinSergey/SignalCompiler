@@ -1,27 +1,14 @@
 package resources.tables.parsertables;
 
+import resources.tables.AbstractTable;
 import resources.token.ParserToken;
 
-import java.util.HashMap;
 import java.util.Map;
 
-abstract class AbstractParserTable {
-
-    private HashMap<Integer, ParserToken> table;
-    private int index;
+abstract class AbstractParserTable extends AbstractTable<ParserToken> {
 
     AbstractParserTable() {
-        this.table = new HashMap<>();
-        index = 0;
-    }
-
-    public int getTokenCode(String token) {
-        for (Map.Entry lex : table.entrySet()) {
-            if (token.equals(lex.getValue().toString())) {
-                return Integer.valueOf(lex.getKey().toString());
-            }
-        }
-        return -1;
+        super();
     }
 
     public int add(ParserToken token) {
@@ -29,8 +16,14 @@ abstract class AbstractParserTable {
         return index;
     }
 
-    public ParserToken getToken(int tokenCode) {
-        return table.get(tokenCode);
+    public int countDeclarationsWithName(String name) {
+        int counter = 0;
+        for (Map.Entry t: table.entrySet()) {
+            if (name.equals(t.getValue().toString())) {
+                counter++;
+            }
+        }
+        return counter;
     }
 
 }

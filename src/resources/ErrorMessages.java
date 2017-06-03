@@ -2,7 +2,7 @@ package resources;
 
 abstract public class ErrorMessages {
 
-    public static final String UNCLOSED_COMMENT = "Scanner error: unclosed comment in line ";
+    public static final String UNCLOSED_COMMENT = "Scanner error: unclosed comment ";
 
     public static final String UNEXPECTED_BEGIN_OF_PROGRAM = "Unexpected begin of program. Expected PROGRAM or PROCEDURE ";
     public static final String UNEXPECTED_END_OF_FILE = "Unexpected end of program ";
@@ -27,5 +27,7 @@ abstract public class ErrorMessages {
     public static final String UNEXPECTED_FUNCTIONS_ATTRIBUTE = "expected \\ ";
     public static final String UNEXPECTED_ASSUMING_OF_FUNCTION_BODY = "expected assume ";
     public static final String UNEXPECTED_LABEL_DECLARATION = "error in labels declaration ";
+
+    public static final String DECLARATION_ERROR = " was already defined at line ";
 
 }

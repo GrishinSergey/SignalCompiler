@@ -18,7 +18,7 @@ public class VariableDeclarations extends AbstractRule {
                 102 != scannerTokenList.getCurrentScannerToken().getCode() &&
                 111 != scannerTokenList.getCurrentScannerToken().getCode()) {
             throwExceptionIfUnexpectedIdentifier(scannerTokenList.getCurrentScannerToken().getCode());
-            int lineNumber = scannerTokenList.getCurrentScannerToken().getLineNumber();
+            int lineNumber = scannerTokenList.getCurrentScannerToken().getLine();
             List<ParserToken> identifiers = new IdentifiersList().getIdentifiersList(scannerTokenList);
             if (6 != scannerTokenList.getCurrentScannerToken().getCode()) {
                 throw new ParserException(ErrorMessages.UNEXPECTED_SYMBOL_IN_VAR_DECLARATION);

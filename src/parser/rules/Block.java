@@ -17,7 +17,7 @@ public class Block {
             throw new ParserException(ErrorMessages.UNEXPECTED_START_OF_BLOCK);
         }
         return new BlockToken("block",
-                scannerTokenList.getCurrentScannerToken().getLineNumber(), declarations,
+                scannerTokenList.getCurrentScannerToken().getLine(), declarations,
                 new StatementsList().getStatementsList(scannerTokenList.getRestOfScannerToken()));
     }
 

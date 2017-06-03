@@ -24,7 +24,7 @@ public class IdentifiersList extends AbstractRule {
                 flag = false;
             } else if (isIdentifier(scannerTokenList.getCurrentScannerToken().getCode())) {
                 IdentifierToken it = new IdentifierToken("variable",
-                        scannerTokenList.getCurrentScannerToken().getLineNumber(),
+                        scannerTokenList.getCurrentScannerToken().getLine(),
                         scannerTokenList.getToken());
                 res.add(it);
                 if (flag) {

@@ -20,7 +20,7 @@ public class ProcedureDeclarations extends AbstractRule {
                 103 != scannerTokenList.getCurrentScannerToken().getCode()) {
             scannerTokenList.getRestOfScannerToken();
             throwExceptionIfUnexpectedIdentifier(scannerTokenList.getCurrentScannerToken().getCode());
-            int lineNumber = scannerTokenList.getCurrentScannerToken().getLineNumber();
+            int lineNumber = scannerTokenList.getCurrentScannerToken().getLine();
             String procedureName = scannerTokenList.getToken();
             Program.ProcedureToken procedureToken = null;
             scannerTokenList.getRestOfScannerToken();

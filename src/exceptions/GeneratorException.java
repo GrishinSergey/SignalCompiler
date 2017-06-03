@@ -1,9 +1,9 @@
 package exceptions;
 
-public class GeneratorException extends Exception {
+public class GeneratorException extends exceptions.Exception {
 
     public GeneratorException() {
-        super();
+        super("");
     }
 
     public GeneratorException(String message) {

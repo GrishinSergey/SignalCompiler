@@ -25,7 +25,7 @@ public class LabelDeclarations extends AbstractRule {
                 flag = false;
             } else if (500 < scannerTokenList.getCurrentScannerToken().getCode()) {
                 LabelToken lt = new LabelToken("label",
-                        scannerTokenList.getCurrentScannerToken().getLineNumber(),
+                        scannerTokenList.getCurrentScannerToken().getLine(),
                         scannerTokenList.getToken());
                 res.add(lt);
                 LabelsParserTable.getInstance().add(lt);

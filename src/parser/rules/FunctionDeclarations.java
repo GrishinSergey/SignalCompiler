@@ -19,7 +19,7 @@ public class FunctionDeclarations  extends AbstractRule {
                 102 != scannerTokenList.getCurrentScannerToken().getCode()) {
             throwExceptionIfUnexpectedIdentifier(scannerTokenList.getCurrentScannerToken().getCode());
             String functionName = scannerTokenList.getToken();
-            int lineNumber = scannerTokenList.getCurrentScannerToken().getLineNumber();
+            int lineNumber = scannerTokenList.getCurrentScannerToken().getLine();
             if (12 != scannerTokenList.getRestOfScannerToken().getCurrentScannerToken().getCode()) {
                 throw new ParserException(ErrorMessages.UNEXPECTED_ASSUMING_OF_FUNCTION_BODY);
             }

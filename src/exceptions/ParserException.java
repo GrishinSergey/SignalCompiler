@@ -1,23 +1,18 @@
 package exceptions;
 
-public class ParserException extends Exception {
+public class ParserException extends exceptions.Exception {
 
-    private int lineNumber = -1;
+    public ParserException() {
+        super("");
+    }
 
     public ParserException(String message) {
         super(message);
     }
 
-    public ParserException(String message, int lineNumber) {
+    public ParserException(String message, int line) {
         super(message);
-        this.lineNumber = lineNumber;
-    }
-
-    public ParserException() {}
-
-
-    public int getLineNumber() {
-        return lineNumber;
+        setLine(line);
     }
 
 }

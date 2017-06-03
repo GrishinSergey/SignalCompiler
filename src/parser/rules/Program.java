@@ -33,7 +33,7 @@ public class Program extends AbstractRule {
         ScannerToken token = scannerTokenList.getCurrentScannerToken(),
                 nextToken = scannerTokenList.getRestOfScannerToken().getCurrentScannerToken();
         throwExceptionIfUnexpectedIdentifier(nextToken.getCode(), ErrorMessages.UNEXPECTED_PROGRAM_NAME);
-        res.add(new ProgramToken("programDeclaration", token.getLineNumber(), scannerTokenList.getToken()));
+        res.add(new ProgramToken("programDeclaration", token.getLine(), scannerTokenList.getToken()));
         throwExceptionIfUnexpectedEndOfLine(scannerTokenList.getRestOfScannerToken().getCurrentScannerToken().getCode());
         res.add(new Block().getBlock(
                 new DeclarationsList().getDeclarationsList(scannerTokenList.getRestOfScannerToken()),

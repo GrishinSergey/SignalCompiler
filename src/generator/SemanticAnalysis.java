@@ -2,6 +2,7 @@ package generator;
 
 import exceptions.GeneratorException;
 import parser.rules.*;
+import resources.ErrorMessages;
 import resources.tables.parsertables.*;
 import resources.token.ParserToken;
 
@@ -24,38 +25,38 @@ class SemanticAnalysis {
         if (declarations.getLabels() != null) {
             for (ParserToken token: declarations.getLabels()) {
                 String name = ((LabelDeclarations.LabelToken) token).getName();
-//                System.out.println(name + " " + countDeclarationsWithName(name));
-                throwExceptionIfRepeatedIdentifier(countDeclarationsWithName(name));
+                throwExceptionIfRepeatedIdentifier(countDeclarationsWithName(name),
+                        name + ErrorMessages.DECLARATION_ERROR + token.getLine());
             }
         }
         if (declarations.getConsts() != null) {
             for (ParserToken token: declarations.getConsts()) {
                 String name = ((ConstDeclarations.ConstDeclarationToken) token).getName();
-//                System.out.println(name + " " + countDeclarationsWithName(name));
-                throwExceptionIfRepeatedIdentifier(countDeclarationsWithName(name));
+                throwExceptionIfRepeatedIdentifier(countDeclarationsWithName(name),
+                        name + ErrorMessages.DECLARATION_ERROR + token.getLine());
             }
         }
         if (declarations.getVariables() != null) {
             for (ParserToken token: declarations.getVariables()) {
                 for (ParserToken token1: ((VariableDeclarations.VariablesDeclarationToken) token).getIdentifiers()) {
                     String name = ((IdentifiersList.IdentifierToken) token1).getName();
-//                    System.out.println(name + " " + countDeclarationsWithName(name));
-                    throwExceptionIfRepeatedIdentifier(countDeclarationsWithName(name));
+                    throwExceptionIfRepeatedIdentifier(countDeclarationsWithName(name),
+                            name + ErrorMessages.DECLARATION_ERROR + token1.getLine());
                 }
             }
         }
         if (declarations.getFunctions() != null) {
             for (ParserToken token: declarations.getFunctions()) {
                 String name = ((FunctionDeclarations.FunctionToken) token).getName();
-//                System.out.println(name + " " + countDeclarationsWithName(name));
-                throwExceptionIfRepeatedIdentifier(countDeclarationsWithName(name));
+                throwExceptionIfRepeatedIdentifier(countDeclarationsWithName(name),
+                        name + ErrorMessages.DECLARATION_ERROR + token.getLine());
             }
         }
         if (declarations.getProcedures() != null) {
             for (ParserToken token: declarations.getProcedures()) {
                 String name = ((Program.ProcedureToken) token).getName();
-//                System.out.println(name + " " + countDeclarationsWithName(name));
-                throwExceptionIfRepeatedIdentifier(countDeclarationsWithName(name));
+                throwExceptionIfRepeatedIdentifier(countDeclarationsWithName(name),
+                        name + ErrorMessages.DECLARATION_ERROR + token.getLine());
             }
         }
         return false;
@@ -103,9 +104,9 @@ class SemanticAnalysis {
         return counter;
     }
 
-    private void throwExceptionIfRepeatedIdentifier(int count) throws GeneratorException {
+    private void throwExceptionIfRepeatedIdentifier(int count, String message) throws GeneratorException {
         if (1 < count) {
-            throw new GeneratorException();
+            throw new GeneratorException(message);
         }
     }
 

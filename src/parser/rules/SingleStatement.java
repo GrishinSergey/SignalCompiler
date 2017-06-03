@@ -13,7 +13,7 @@ public class SingleStatement extends AbstractRule {
 
     AssemblyInsertStatementToken getAssemblyInsertStatement(ScannerList scannerTokenList) throws ParserException {
         File file = new File(scannerTokenList.getToken());
-        int lineNumber = scannerTokenList.getCurrentScannerToken().getLineNumber();
+        int lineNumber = scannerTokenList.getCurrentScannerToken().getLine();
         if (!file.exists() || file.isDirectory()) {
             throw new ParserException(ErrorMessages.UNEXPECTED_PATH_TO_ASSEMBLY_INSERT_FILE);
         }
@@ -22,14 +22,14 @@ public class SingleStatement extends AbstractRule {
         }
         if (9 != scannerTokenList.getRestOfScannerToken().getCurrentScannerToken().getCode()) {
             throw new ParserException(ErrorMessages.UNEXPECTED_END_OF_ASSEMBLY_INSERT,
-                    scannerTokenList.getPrevious().getLineNumber());
+                    scannerTokenList.getPrevious().getLine());
         }
         return new AssemblyInsertStatementToken("asm", lineNumber, file.getAbsolutePath());
     }
 
     LabelStatementToken getLabelStatement(ScannerList scannerTokenList) throws ParserException {
         String labelIdentifier = scannerTokenList.getToken();
-        int lineNumber = scannerTokenList.getCurrentScannerToken().getLineNumber();
+        int lineNumber = scannerTokenList.getCurrentScannerToken().getLine();
         scannerTokenList.getRestOfScannerToken();
         if (6 != scannerTokenList.getCurrentScannerToken().getCode()) {
             throw new ParserException(ErrorMessages.UNEXPECTED_PROCEDURE_CALL);
@@ -42,7 +42,7 @@ public class SingleStatement extends AbstractRule {
 
     LoopStatementToken getLoopStatement(ScannerList scannerTokenList) throws ParserException {
         LoopStatementToken loopStatementToken = new LoopStatementToken("loop",
-                scannerTokenList.getPrevious().getLineNumber(),
+                scannerTokenList.getPrevious().getLine(),
                 new StatementsList().getStatementsList(scannerTokenList));
         if (116 != scannerTokenList.getCurrentScannerToken().getCode()) {
             throw new ParserException(ErrorMessages.UNEXPECTED_END_OF_LOOP);
@@ -56,7 +56,7 @@ public class SingleStatement extends AbstractRule {
         ProcedureCallStatementToken procedureCallStatementToken = null;
         if (1 == scannerTokenList.getCurrentScannerToken().getCode()) {
             procedureCallStatementToken = new ProcedureCallStatementToken("procedurecall",
-                    scannerTokenList.getCurrentScannerToken().getLineNumber(),
+                    scannerTokenList.getCurrentScannerToken().getLine(),
                     scannerTokenList.getToken(scannerTokenList.getPrevious().getCode()),
                     new IdentifiersList().getIdentifiersList(scannerTokenList.getRestOfScannerToken()));
             if (2 != scannerTokenList.getCurrentScannerToken().getCode()) {
@@ -67,7 +67,7 @@ public class SingleStatement extends AbstractRule {
         throwExceptionIfUnexpectedEndOfLine(scannerTokenList.getCurrentScannerToken().getCode());
         if (procedureCallStatementToken == null) {
             procedureCallStatementToken = new ProcedureCallStatementToken("procedurecall",
-                    scannerTokenList.getCurrentScannerToken().getLineNumber(),
+                    scannerTokenList.getCurrentScannerToken().getLine(),
                     scannerTokenList.getToken(scannerTokenList.getPrevious().getCode()),
                     null);
         }
@@ -79,7 +79,7 @@ public class SingleStatement extends AbstractRule {
         String value = scannerTokenList.getToken();
         scannerTokenList.getRestOfScannerToken();
         throwExceptionIfUnexpectedEndOfLine(scannerTokenList.getCurrentScannerToken().getCode());
-        return new GotoStatementToken("goto", scannerTokenList.getPrevious().getLineNumber(), value);
+        return new GotoStatementToken("goto", scannerTokenList.getPrevious().getLine(), value);
     }
 
     InStatementToken getInStatement(ScannerList scannerTokenList) throws ParserException {
@@ -87,7 +87,7 @@ public class SingleStatement extends AbstractRule {
         String stream = scannerTokenList.getToken();
         scannerTokenList.getRestOfScannerToken();
         throwExceptionIfUnexpectedEndOfLine(scannerTokenList.getCurrentScannerToken().getCode());
-        return new InStatementToken("in", scannerTokenList.getCurrentScannerToken().getLineNumber(), stream);
+        return new InStatementToken("in", scannerTokenList.getCurrentScannerToken().getLine(), stream);
     }
 
     OutStatementToken getOutStatement(ScannerList scannerTokenList) throws ParserException {
@@ -95,7 +95,7 @@ public class SingleStatement extends AbstractRule {
         String stream = scannerTokenList.getToken();
         scannerTokenList.getRestOfScannerToken();
         throwExceptionIfUnexpectedEndOfLine(scannerTokenList.getCurrentScannerToken().getCode());
-        return new OutStatementToken("out", scannerTokenList.getCurrentScannerToken().getLineNumber(), stream);
+        return new OutStatementToken("out", scannerTokenList.getCurrentScannerToken().getLine(), stream);
     }
 
     LinkStatementToken getLinkStatement(ScannerList scannerTokenList) throws ParserException {
@@ -110,12 +110,12 @@ public class SingleStatement extends AbstractRule {
         String value = scannerTokenList.getToken();
         scannerTokenList.getRestOfScannerToken();
         throwExceptionIfUnexpectedEndOfLine(scannerTokenList.getCurrentScannerToken().getCode());
-        return new LinkStatementToken("link", scannerTokenList.getPrevious().getLineNumber(), variable, value);
+        return new LinkStatementToken("link", scannerTokenList.getPrevious().getLine(), variable, value);
     }
 
     ReturnStatementToken getReturnStatement(ScannerList scannerTokenList) throws ParserException {
         throwExceptionIfUnexpectedEndOfLine(scannerTokenList.getCurrentScannerToken().getCode());
-        return new ReturnStatementToken("return", scannerTokenList.getCurrentScannerToken().getLineNumber());
+        return new ReturnStatementToken("return", scannerTokenList.getCurrentScannerToken().getLine());
     }
 
     public class LabelStatementToken extends ParserToken {

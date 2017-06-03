@@ -3,19 +3,19 @@ package resources.token;
 public class ScannerToken {
 
     private int code;
-    private int lineNumber;
+    private int line;
 
     public ScannerToken(int code, int lineNumber) {
         this.code = code;
-        this.lineNumber = lineNumber;
+        this.line = lineNumber;
     }
 
     public int getCode() {
         return code;
     }
 
-    public int getLineNumber() {
-        return lineNumber;
+    public int getLine() {
+        return line;
     }
 
 }

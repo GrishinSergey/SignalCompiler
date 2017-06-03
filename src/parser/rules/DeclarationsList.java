@@ -14,7 +14,7 @@ public class DeclarationsList extends AbstractRule {
     DeclarationsListToken getDeclarationsList(ScannerList scannerTokenList) throws ParserException {
         declarationsListToken = new DeclarationsListToken(
                 "declarationsList",
-                scannerTokenList.getCurrentScannerToken().getLineNumber()
+                scannerTokenList.getCurrentScannerToken().getLine()
         );
         while (scannerTokenList.isNotEnded() && 102 != scannerTokenList.getCurrentScannerToken().getCode()) {
             getDeclaration(scannerTokenList);

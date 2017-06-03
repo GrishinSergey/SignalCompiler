@@ -18,7 +18,7 @@ public class ConstDeclarations extends AbstractRule {
                 102 != scannerTokenList.getCurrentScannerToken().getCode() &&
                 103 != scannerTokenList.getCurrentScannerToken().getCode()) {
             throwExceptionIfUnexpectedIdentifier(scannerTokenList.getCurrentScannerToken().getCode());
-            int lineNumber = scannerTokenList.getCurrentScannerToken().getLineNumber();
+            int lineNumber = scannerTokenList.getCurrentScannerToken().getLine();
             String constName = scannerTokenList.getToken();
             if (12 != scannerTokenList.getRestOfScannerToken().getCurrentScannerToken().getCode()) {
                 throw new ParserException("Error const declaration");

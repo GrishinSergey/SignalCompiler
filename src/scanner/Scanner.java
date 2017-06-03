@@ -13,7 +13,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
 
 
 public class Scanner {
@@ -34,83 +33,73 @@ public class Scanner {
         int tokenCode;
         String token;
         do {
-            try {
-                if (isLetter()) {
-                    token = getIdentifier();
-                    if ((tokenCode = KeyWordsScannerTable.getInstance().getTokenCode(token)) != -1) {
-                        addToken(tokenCode);
-                    }
-                    else {
-                        addIdentifier(token);
-                    }
+            if (isLetter()) {
+                token = getIdentifier();
+                if ((tokenCode = KeyWordsScannerTable.getInstance().getTokenCode(token)) != -1) {
+                    addToken(tokenCode);
                 }
-                else if (Character.isDigit(chr)) {
-                    token = "";
-                    while (Character.isDigit(chr)) {
+                else {
+                    addIdentifier(token);
+                }
+            }
+            else if (Character.isDigit(chr)) {
+                token = "";
+                while (Character.isDigit(chr)) {
+                    token += (char) chr;
+                    chr = reader.read();
+                }
+                if ((tokenCode = ConstScannerTable.getInstance().getTokenCode(token)) != -1) {
+                    addToken(tokenCode);
+                }
+                else {
+                    addToken(ConstScannerTable.getInstance().add(token));
+                }
+            }
+            else if (isDelimiter()) {
+                if (chr == 40) {
+                    token = Character.toString((char) chr);
+                    chr = reader.read();
+                    if (chr == 42) {
+                        getComment();
+                    }
+                    else if (chr == 36) {
                         token += (char) chr;
                         chr = reader.read();
-                    }
-                    if ((tokenCode = ConstScannerTable.getInstance().getTokenCode(token)) != -1) {
-                        addToken(tokenCode);
-                    }
-                    else {
-                        addToken(ConstScannerTable.getInstance().add(token));
-                    }
-                }
-                else if (isDelimiter()) {
-                    if (chr == 40) {
-                        token = Character.toString((char) chr);
-                        chr = reader.read();
-                        if (chr == 42) {
-                            getComment();
-                        }
-                        else if (chr == 36) {
+                        addToken(DelimitersScannerTable.getInstance().getTokenCode(token));
+                        readWhileWhitespace();
+                        token = "";
+                        while (!isWhitespace() && chr != -1) {
                             token += (char) chr;
-                            chr = reader.read();
-                            addToken(DelimitersScannerTable.getInstance().getTokenCode(token));
-                            readWhileWhitespace();
-                            token = "";
-                            while (!isWhitespace() && chr != -1) {
-                                token += (char) chr;
-                                if (isNewLine()) {
-                                    lineNumber++;
-                                }
-                                chr = reader.read();
-                            }
-                            addIdentifier(token);
-                            readWhileWhitespace();
-                            token = "" + (char) chr;
-                            chr = reader.read();
                             if (isNewLine()) {
                                 lineNumber++;
                             }
-                            token += (char) chr;
-                            addToken(DelimitersScannerTable.getInstance().getTokenCode(token));
                             chr = reader.read();
                         }
-                        else {
-                            addToken(DelimitersScannerTable.getInstance().getTokenCode(token));
+                        addIdentifier(token);
+                        readWhileWhitespace();
+                        token = "" + (char) chr;
+                        chr = reader.read();
+                        if (isNewLine()) {
+                            lineNumber++;
                         }
-                    }
-                    else {
-                        addToken(DelimitersScannerTable.getInstance().getTokenCode(Character.toString((char) chr)));
+                        token += (char) chr;
+                        addToken(DelimitersScannerTable.getInstance().getTokenCode(token));
                         chr = reader.read();
                     }
-                }
-                else if (isWhitespace()) {
-                    readWhileWhitespace();
-                }
-                else {
-                    throw new ScannerException();
-                }
-            } catch (ScannerException se) {
-                if (!Objects.equals(se.getMessage(), null)) {
-                    throw new ScannerException(se.getMessage());
+                    else {
+                        addToken(DelimitersScannerTable.getInstance().getTokenCode(token));
+                    }
                 }
                 else {
-                    throw new ScannerException(ErrorMessages.UNEXPECTED_TOKEN + "on line " + lineNumber);
-
+                    addToken(DelimitersScannerTable.getInstance().getTokenCode(Character.toString((char) chr)));
+                    chr = reader.read();
                 }
+            }
+            else if (isWhitespace()) {
+                readWhileWhitespace();
+            }
+            else {
+                throwNewScannerException(ErrorMessages.UNEXPECTED_TOKEN, lineNumber);
             }
         } while (chr != -1);
         reader.close();
@@ -169,9 +158,16 @@ public class Scanner {
             }
         }
         if (!closedCommentFlag) {
-            throw new ScannerException(ErrorMessages.UNCLOSED_COMMENT + firstCommentLine);
+            throwNewScannerException(ErrorMessages.UNCLOSED_COMMENT, firstCommentLine);
         }
         chr = reader.read();
+    }
+
+    private ScannerException throwNewScannerException(String message, int lineNumber) throws ScannerException {
+        ScannerException se = new ScannerException(message);
+        se.setLine(lineNumber);
+        throw se;
+
     }
 
     private boolean isNewLine() throws IOException {

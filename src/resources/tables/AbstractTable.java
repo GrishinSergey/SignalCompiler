@@ -1,6 +1,7 @@
 package resources.tables;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public abstract class AbstractTable<T> {
 
@@ -14,6 +15,15 @@ public abstract class AbstractTable<T> {
 
     public T getToken(int tokenCode) {
         return table.get(tokenCode);
+    }
+
+    public T findToken(String token) {
+        for (Map.Entry t: table.entrySet()) {
+            if (token.equals(t.getValue().toString())) {
+                return (T) t.getValue();
+            }
+        }
+        return null;
     }
 
 }

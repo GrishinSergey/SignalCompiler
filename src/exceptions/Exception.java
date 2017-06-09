@@ -4,7 +4,6 @@ abstract public class Exception extends java.lang.Exception {
 
     private int line;
     private String fileName;
-    private String className;
     private String message;
 
     Exception(String message) {
@@ -24,16 +23,12 @@ abstract public class Exception extends java.lang.Exception {
         this.fileName = fileName;
     }
 
-    public void setClassName(String className) {
-        this.className = className;
-    }
-
     public int getLine() {
         return line;
     }
 
     public exceptions.Exception getException() {
-        StackTraceElement[] ste = {new StackTraceElement(className, "", fileName, line)};
+        StackTraceElement[] ste = {new StackTraceElement("", "", fileName, line)};
         this.setStackTrace(ste);
         return this;
     }

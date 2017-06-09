@@ -28,6 +28,7 @@ abstract public class ErrorMessages {
     public static final String UNEXPECTED_ASSUMING_OF_FUNCTION_BODY = "expected assume ";
     public static final String UNEXPECTED_LABEL_DECLARATION = "error in labels declaration ";
 
-    public static final String DECLARATION_ERROR = " was already defined at line ";
+    public static final String DECLARATION_ERROR = " was already defined ";
+    public static final String UNDECLARED_PROCEDURE = " is undeclared ";
 
 }

@@ -6,6 +6,7 @@ import resources.token.ParserToken;
 import scanner.ScannerList;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -69,7 +70,7 @@ public class SingleStatement extends AbstractRule {
             procedureCallStatementToken = new ProcedureCallStatementToken("procedurecall",
                     scannerTokenList.getCurrentScannerToken().getLine(),
                     scannerTokenList.getToken(scannerTokenList.getPrevious().getCode()),
-                    null);
+                    new ArrayList<>());
         }
         return procedureCallStatementToken;
     }

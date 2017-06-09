@@ -43,6 +43,7 @@ public class ConstDeclarations extends AbstractRule {
 
     public class ConstDeclarationToken extends ParserToken {
 
+        private String attribute;
         private String constName;
         private String value;
 
@@ -50,6 +51,11 @@ public class ConstDeclarations extends AbstractRule {
             super(token, line);
             this.constName = constName;
             this.value = value;
+            this.attribute = "INTEGER";
+        }
+
+        public String getAttribute() {
+            return attribute;
         }
 
         public String getName() {

@@ -52,46 +52,34 @@ public class FunctionDeclarations  extends AbstractRule {
     public class FunctionToken extends ParserToken {
 
         private String name;
+        private int maxIntervalValue;
         private int countValues;
-        private int step;
         private String expression;
-        private double[] values;
+        private List<String> values;
 
-        FunctionToken(String token, int line, String name, int countValues, int step, String expression) {
+        FunctionToken(String token, int line, String name, int maxIntervalValue, int countValues, String expression) {
             super(token, line);
             this.name = name;
+            this.maxIntervalValue = maxIntervalValue;
             this.countValues = countValues;
-            this.step = step;
             this.expression = expression;
-            this.values = calculateFunctionValues();
+            this.values = new ArrayList<>();
+            calculateFunctionValues();
         }
 
         public String getName() {
             return name;
         }
 
-        public int getCountValues() {
-            return countValues;
-        }
-
-        public int getStep() {
-            return step;
-        }
-
-        public String getExpression() {
-            return expression;
-        }
-
-        public double[] getValues() {
+        public List<String> getValues() {
             return values;
         }
 
-        private double[] calculateFunctionValues() {
-            double [] d = new double[countValues / step];
-            for (int i = 0, j = 0; i < countValues; i += step, j++) {
-                d[j] = Math.sin(i);
+        private void calculateFunctionValues() {
+            double step = (maxIntervalValue * 1.0) / countValues;
+            for (double i = 1.0; i <= maxIntervalValue; i+= step) {
+                values.add(String.valueOf(Math.sin(i)));
             }
-            return d;
         }
 
     }

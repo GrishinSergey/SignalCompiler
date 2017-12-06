@@ -1,0 +1,27 @@
+PROCEDURE PROC3(INTEGER);
+
+LABEL 123, 124;
+CONST A = 1; B = 2;
+VAR A1,B1:INTEGER;
+    SJDKFL:FLOAT;
+DEFFUNC CALCSIN = SIN \ 9, 5;
+PROCEDURE PROC1(INTEGER, INTEGER);
+PROCEDURE PROC2;
+PROCEDURE PROC4();
+BEGIN
+    LOOP
+        GOTO 123;
+    ENDLOOP;
+    ;;;;RETURN;;;
+    LINK A1, 5678;
+    LINK B1, 1245;
+
+    ($ /home/sergey/Java/projects/JavaNative/Compiler/asm-insert.asm $)
+
+    123: IN 5678;
+    OUT 1245;
+
+    PROC1(A,B);
+    PROC2;
+
+END.

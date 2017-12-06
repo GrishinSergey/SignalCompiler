@@ -1,0 +1,6 @@
+PROGRAM PROGRAMNAME;
+
+BEGIN
+    ыаылваиыва
+
+END.
